@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { products } from '../data/products'
@@ -6,7 +5,6 @@ import hubLogo from '../assets/Efficiensee.png'
 import styles from './HubPage.module.css'
 
 const hub = products.find((p) => p.id === 'hub')!
-const oasis = products.find((p) => p.id === 'oasis')!
 
 const moduleIcons: Record<string, string> = {
   'Cultivation': '🌱',
@@ -310,28 +308,6 @@ export default function HubPage() {
             <a href={hub.url} target="_blank" rel="noreferrer" className={styles.ctaBtn}>
               Open HarvestHub →
             </a>
-          </div>
-        </section>
-
-        {/* ── Also explore OrderOasis ──────────────────────────── */}
-        <section className={styles.alsoSection}>
-          <div className={styles.alsoInner}>
-            <p className={styles.alsoLabel}>Also from Efficiensee</p>
-            <div className={styles.alsoCard}>
-              <img src={oasis.heroImage} alt={oasis.name} className={styles.alsoImage} />
-              <div className={styles.alsoCopy}>
-                <div className={styles.alsoBadge}>OrderOasis</div>
-                <h3 className={styles.alsoTitle}>{oasis.name}</h3>
-                <p className={styles.alsoTagline}>{oasis.tagline}</p>
-                <p className={styles.alsoDesc}>{oasis.description}</p>
-                <div className={styles.alsoActions}>
-                  <Link to={oasis.path} className={styles.alsoLearn}>Full Overview</Link>
-                  <a href={oasis.url} target="_blank" rel="noreferrer" className={styles.alsoLaunch}>
-                    Open OrderOasis →
-                  </a>
-                </div>
-              </div>
-            </div>
           </div>
         </section>
 
