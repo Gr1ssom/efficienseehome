@@ -1,0 +1,19 @@
+{
+  "mcpServers": {
+    "github": {
+      "enabled": true
+    },
+    "linear": {
+      "enabled": true
+    },
+    "dutchie": {
+      "enabled": true
+    },
+    "notion": {
+      "enabled": true
+    },
+    "headset": {
+      "enabled": false
+    }
+  }
+}
