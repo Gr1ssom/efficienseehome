@@ -3,26 +3,24 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { products } from '../data/products'
 import hubLogo from '../assets/Efficiensee.png'
-import oasisLogo from '../assets/HarvestHub_efficiensee.png'
 import EfficienseeLogo from '../components/EfficienseeLogo'
 import styles from './HomePage.module.css'
 
 const productLogos: Record<string, string> = {
   hub: hubLogo,
-  oasis: oasisLogo,
 }
 
 const scrollItems = [
-  'HarvestHub', 'OrderOasis', 'METRC Integration', 'LeafLink Sync',
-  'Real-Time Operations', 'iPad Native', 'Compliance-Ready',
-  'Hash Lab Workflow', 'Bulk Import', 'Live Sensor Data',
+  'HarvestHub', 'METRC Integration', 'LeafLink Sync',
+  'Real-Time Operations', 'Compliance-Ready', 'Hash Lab Workflow',
+  'Live Harvest', 'Scale Integration', 'Live Sensor Data',
 ]
 
 const stats = [
   { value: '40+', label: 'Facility modules' },
   { value: 'Live', label: 'Supabase Realtime' },
   { value: '5', label: 'Hardware integrations' },
-  { value: 'Native', label: 'iOS / iPad app' },
+  { value: '7', label: 'Departments covered' },
 ]
 
 export default function HomePage() {
@@ -49,17 +47,17 @@ export default function HomePage() {
               </h1>
 
               <p className={styles.heroDesc}>
-                Two purpose-built platforms that cover your entire supply chain —
-                from the first clone in the propagation room to the final delivery at the dispensary door.
+                One purpose-built platform for your entire facility —
+                from the first clone in the propagation room to the finished package ready to ship.
               </p>
 
               <div className={styles.heroActions}>
                 <a href="https://hub.efficiensee.io" target="_blank" rel="noreferrer" className={styles.btnPrimary}>
                   Explore HarvestHub
                 </a>
-                <a href="https://oasis.efficiensee.io" target="_blank" rel="noreferrer" className={styles.btnSecondary}>
-                  Explore OrderOasis
-                </a>
+                <Link to="/products/hub" className={styles.btnSecondary}>
+                  See the full platform
+                </Link>
               </div>
 
               {/* inline stats */}
@@ -120,7 +118,7 @@ export default function HomePage() {
 
               {/* floating accent tags */}
               <div className={styles.floatTag1}>Real-Time</div>
-              <div className={styles.floatTag3}>iPad Native</div>
+              <div className={styles.floatTag3}>Live Sensors</div>
             </div>
           </div>
 
@@ -148,10 +146,10 @@ export default function HomePage() {
           <div className={styles.productsInner}>
             <div className={styles.productsSectionHead}>
               <span className={styles.eyebrow}>Our Products</span>
-              <h2 className={styles.productsSectionTitle}>Two products. One ecosystem.</h2>
+              <h2 className={styles.productsSectionTitle}>One platform. Seed to shelf.</h2>
               <p className={styles.productsSectionSub}>
-                Built for every stage of the cannabis supply chain — from the first seed
-                to the final delivery.
+                HarvestHub covers every stage inside a cultivation and manufacturing facility —
+                from the first seed to the finished package.
               </p>
             </div>
 
@@ -225,8 +223,8 @@ export default function HomePage() {
                 { step: '02', label: 'Cultivation', product: 'HarvestHub', color: '#2d7a22' },
                 { step: '03', label: 'Harvest & Processing', product: 'HarvestHub', color: '#2d7a22' },
                 { step: '04', label: 'Packaging & Lab', product: 'HarvestHub', color: '#2d7a22' },
-                { step: '05', label: 'Distribution', product: 'OrderOasis', color: '#1a6e8e' },
-                { step: '06', label: 'Fulfillment', product: 'OrderOasis', color: '#1a6e8e' },
+                { step: '05', label: 'Hash Lab & Pre-Roll', product: 'HarvestHub', color: '#2d7a22' },
+                { step: '06', label: 'Fulfillment', product: 'HarvestHub', color: '#2d7a22' },
               ].map((s, i, arr) => (
                 <div key={s.step} className={styles.chainStep}>
                   <div className={styles.chainStepNum} style={{ color: s.color, borderColor: `${s.color}40` }}>
@@ -261,22 +259,22 @@ export default function HomePage() {
               {[
                 {
                   title: 'Compliance First',
-                  body: 'METRC integration, audit trails, and manifest generation are baked into every workflow — not added as an afterthought.',
+                  body: 'METRC data and audit trails are built into every workflow — not added as an afterthought.',
                   num: '01',
                 },
                 {
                   title: 'Real-Time Visibility',
-                  body: "Live sensor data, scale readings, and order status updates — you always know exactly where everything stands.",
+                  body: "Live sensor data, scale readings, and batch status updates — you always know exactly where everything stands.",
                   num: '02',
                 },
                 {
                   title: 'Operator-Grade UX',
-                  body: 'Designed for the floor, the dispatch desk, and the executive suite. Fast, focused, and built for how real teams work.',
+                  body: 'Designed for the grow floor, the lab, and the executive suite. Fast, focused, and built for how real teams work.',
                   num: '03',
                 },
                 {
-                  title: 'Integrated Ecosystem',
-                  body: 'HarvestHub and OrderOasis share inventory data seamlessly, so nothing falls through the gap between grow and delivery.',
+                  title: 'Connected Facility',
+                  body: 'METRC, LeafLink, Growlink, SensorPush, and industrial scales feed one system, so nothing falls through the gaps between departments.',
                   num: '04',
                 },
               ].map((item) => (
@@ -303,15 +301,12 @@ export default function HomePage() {
                 Ready to run a<br />tighter operation?
               </h2>
               <p className={styles.ctaDesc}>
-                Start with HarvestHub, OrderOasis, or both. Purpose-built for cannabis — nothing generic.
+                Start with HarvestHub. Purpose-built for cannabis — nothing generic.
               </p>
             </div>
             <div className={styles.ctaActions}>
               <a href="https://hub.efficiensee.io" target="_blank" rel="noreferrer" className={styles.ctaBtnHub}>
                 Start with HarvestHub →
-              </a>
-              <a href="https://oasis.efficiensee.io" target="_blank" rel="noreferrer" className={styles.ctaBtnOasis}>
-                Start with OrderOasis →
               </a>
               <p className={styles.ctaNote}>No credit card required</p>
             </div>

@@ -16,7 +16,7 @@ export default function Footer() {
             </div>
           </div>
           <p className={styles.tagline}>
-            Purpose-built software for the cannabis industry — from seed to delivery.
+            Purpose-built software for the cannabis industry — from seed to shelf.
           </p>
         </div>
 
