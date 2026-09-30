@@ -55,8 +55,8 @@ export default function HomePage() {
                 <Link to="/demo" className={styles.btnPrimary}>
                   Explore HarvestHub
                 </Link>
-                <Link to="/products/hub" className={styles.btnSecondary}>
-                  See the full platform
+                <Link to="/early-access" className={styles.btnSecondary}>
+                  Get early access
                 </Link>
               </div>
 
@@ -306,8 +306,11 @@ export default function HomePage() {
               <Link to="/demo" className={styles.ctaBtnHub}>
                 Start with HarvestHub →
               </Link>
+              <Link to="/early-access" className={styles.ctaBtnEarly}>
+                Get early access &amp; book a meeting
+              </Link>
               <p className={styles.ctaNote}>
-                Interactive demo · no sign-up · <Link to="/demo" className={styles.ctaNoteV2}>V2 coming soon</Link>
+                Interactive demo · no sign-up · <Link to="/early-access" className={styles.ctaNoteV2}>V2 coming soon</Link>
               </p>
             </div>
           </div>

@@ -1,16 +1,16 @@
 import { useEffect, useRef, useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import DemoPlayer from '../demo/DemoPlayer'
 import { sidebar, workflows } from '../demo/workflows'
 import type { DemoWorkflow } from '../demo/types'
+import { BOOKING_URL } from '../lib/signups'
 import styles from './DemoPage.module.css'
 
 type Mode = 'watch' | 'guided'
 
 const SIGN_IN_URL = 'https://hub.efficiensee.io'
-const CONTACT = 'mailto:hello@efficiensee.io'
 
 const v2Points = [
   { title: 'Rebuilt from the ground up', body: 'A faster, modern app designed around the way facilities actually move product.' },
@@ -114,7 +114,8 @@ export default function DemoPage() {
                     <button className={styles.btnSecondary} onClick={() => choose(selected)}>
                       ↺ Replay
                     </button>
-                    <a href={CONTACT} className={styles.btnSecondary}>Book a live walkthrough</a>
+                    <Link to="/early-access?src=demo" className={styles.btnSecondary}>Get early access</Link>
+                    <a href={BOOKING_URL} target="_blank" rel="noreferrer" className={styles.btnSecondary}>📅 Book a meeting</a>
                   </div>
                 </div>
               ) : (
@@ -145,9 +146,14 @@ export default function DemoPage() {
                   The next generation of HarvestHub is in the works. Sign up for updates and we’ll let you
                   know when it’s ready.
                 </p>
-                <a href={`${CONTACT}?subject=HarvestHub%20V2%20updates`} className={styles.btnSecondary}>
-                  Get V2 updates
-                </a>
+                <div className={styles.v2Actions}>
+                  <Link to="/early-access?src=demo" className={styles.btnEarly}>
+                    Get early access
+                  </Link>
+                  <a href={BOOKING_URL} target="_blank" rel="noreferrer" className={styles.btnSecondary}>
+                    📅 Book a meeting
+                  </a>
+                </div>
               </div>
               <ul className={styles.v2List}>
                 {v2Points.map((p) => (

@@ -59,6 +59,9 @@ export default function Navbar() {
           <Link to="/demo" className={styles.ctaBtn} onClick={() => setOpen(false)}>
             Get Started
           </Link>
+          <Link to="/early-access" className={styles.earlyBtn} onClick={() => setOpen(false)}>
+            Early access
+          </Link>
           <button
             className={styles.burger}
             aria-label="Toggle menu"

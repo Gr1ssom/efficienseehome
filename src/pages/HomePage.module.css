@@ -899,6 +899,24 @@
   box-shadow: 0 8px 32px rgba(45,122,34,0.4);
 }
 
+.ctaBtnEarly {
+  display: block;
+  width: 100%;
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 15px;
+  text-align: center;
+  color: #1a2535;
+  background: #e8b84b;
+  transition: opacity 150ms, transform 150ms;
+}
+
+.ctaBtnEarly:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
 .ctaNote {
   font-size: 12px;
   color: #3d5e78;

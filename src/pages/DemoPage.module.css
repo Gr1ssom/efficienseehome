@@ -52,6 +52,27 @@
   border: 1px solid rgba(255,255,255,0.14);
 }
 
+.btnEarly {
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 22px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 14px;
+  color: #1a2535;
+  background: #e8b84b;
+  white-space: nowrap;
+  transition: transform 150ms;
+}
+
+.btnEarly:hover { transform: translateY(-2px); }
+
+.v2Actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
 .btnPrimary:hover,
 .btnSecondary:hover { transform: translateY(-2px); }
 .btnSecondary:hover { background: rgba(255,255,255,0.1); }

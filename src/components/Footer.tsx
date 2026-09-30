@@ -55,6 +55,7 @@ export default function Footer() {
           <h4 className={styles.colTitle}>Company</h4>
           <ul className={styles.colList}>
             <li><Link to="/" className={styles.colLink}>Home</Link></li>
+            <li><Link to="/early-access" className={styles.colLink}>Early access</Link></li>
             <li><a href="mailto:hello@efficiensee.io" className={styles.colLink}>Contact</a></li>
           </ul>
         </div>
