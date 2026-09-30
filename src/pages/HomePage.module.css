@@ -906,6 +906,14 @@
   width: 100%;
 }
 
+.ctaNoteV2 {
+  color: #e8b84b;
+}
+
+.ctaNoteV2:hover {
+  text-decoration: underline;
+}
+
 /* ── Responsive ───────────────────────────────────────────────── */
 @media (max-width: 1100px) {
   .heroInner {

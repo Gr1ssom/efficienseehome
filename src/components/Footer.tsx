@@ -36,8 +36,15 @@ export default function Footer() {
           <ul className={styles.colList}>
             {products.map((p) => (
               <li key={p.id}>
+                <Link to={p.demoPath} className={styles.colLink}>
+                  {p.name} demo &rarr;
+                </Link>
+              </li>
+            ))}
+            {products.map((p) => (
+              <li key={`${p.id}-signin`}>
                 <a href={p.url} target="_blank" rel="noreferrer" className={styles.colLink}>
-                  Open {p.name.replace('Efficiensee ', '')} &rarr;
+                  Customer sign in
                 </a>
               </li>
             ))}

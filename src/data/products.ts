@@ -23,6 +23,8 @@ export interface Product {
   tagline: string
   description: string
   url: string
+  /** Interactive demo the site's Start / Open buttons lead to. */
+  demoPath: string
   path: string
   accentColor: string
   accentGradient: string
@@ -42,6 +44,7 @@ export const products: Product[] = [
     description:
       'HarvestHub is a comprehensive operations platform for large-scale cannabis cultivation facilities. It coordinates cultivation teams, tracks batches through complex multi-stage workflows, integrates with regulatory and distribution systems, and provides real-time visibility across every department — from propagation to packaging.',
     url: 'https://hub.efficiensee.io',
+    demoPath: '/demo',
     path: '/products/hub',
     accentColor: '#2d7a22',
     accentGradient: 'linear-gradient(135deg, #2d7a22, #e68c1a)',

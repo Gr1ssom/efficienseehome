@@ -103,6 +103,18 @@
   box-shadow: 0 4px 16px rgba(45,122,34,0.4);
 }
 
+.signIn {
+  font-size: 14px;
+  font-weight: 500;
+  color: #8fa4ba;
+  white-space: nowrap;
+  transition: color 150ms ease;
+}
+
+.signIn:hover {
+  color: #fff;
+}
+
 .burger {
   display: none;
   flex-direction: column;
@@ -175,7 +187,8 @@
     display: flex;
   }
 
-  .ctaBtn {
+  .ctaBtn,
+  .signIn {
     display: none;
   }
 }
