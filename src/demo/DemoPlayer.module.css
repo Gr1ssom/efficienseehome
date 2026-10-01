@@ -1026,3 +1026,11 @@
 .panelHead { flex-wrap: wrap; }
 .panels[style*="repeat(4"] .cardFields { grid-template-columns: minmax(0, 1fr); }
 .panels[style*="repeat(4"] .panelHead { font-size: 12px; padding: 7px 9px; }
+
+/* Host for modals recreated from HarvestHub's markup (they position themselves inside it). */
+.realHost {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  animation: fade 200ms ease;
+}

@@ -1,3 +1,5 @@
+import type { ComponentType } from 'react'
+
 export type Tone = 'green' | 'amber' | 'blue' | 'red' | 'gray' | 'purple' | 'teal'
 
 /** A table cell: plain text, or a coloured status pill. */
@@ -81,11 +83,18 @@ export interface DemoModal {
   wide?: boolean
 }
 
+/** A modal recreated from HarvestHub's own markup (src/demo/hh/modals). */
+export interface RealModal {
+  real: ComponentType
+  /** Label of the button the operator clicks, for the guided-mode hint. */
+  confirm: string
+}
+
 /** One screen state and the single click the operator makes on it. */
 export interface DemoFrame {
   screen: DemoScreen
   /** When set, the click is the modal's confirm button. */
-  modal?: DemoModal
+  modal?: DemoModal | RealModal
   /** Brief caption for this click (shown under the step text). */
   note?: string
 }
@@ -102,7 +111,7 @@ export interface DemoStep {
   /** Click-by-click frames. Older steps can use screen/modal instead. */
   frames?: DemoFrame[]
   screen?: DemoScreen
-  modal?: DemoModal
+  modal?: DemoModal | RealModal
   /** Screen after the last click (status changes). */
   after?: DemoScreen
   /** Rows after the action completes (shorthand for `after`). */

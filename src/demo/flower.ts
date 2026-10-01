@@ -1,4 +1,6 @@
 import type { Cell, DemoCard, DemoScreen, DemoWorkflow } from './types'
+import SelectHarvestDateModal from './hh/modals/SelectHarvestDateModal'
+import { BATCH, METRC_HARVEST, STRAIN, TAG_PKG, TAG_SRC, TAG_TEST, TEAM as TEAM_LIST } from './hh/demoData'
 
 /*
  * Flower walkthrough, click for click as HarvestHub V1 runs it today:
@@ -12,13 +14,7 @@ import type { Cell, DemoCard, DemoScreen, DemoWorkflow } from './types'
  * results from it and never writes back.
  */
 
-const STRAIN = 'Gelato Cake'
-const BATCH = 'HD 09/22 Gelato Cake'
-const METRC_HARVEST = 'GC-0922-F3'
-const TEAM = 'M. Alvarez, J. Chen, R. Okafor, T. Nguyen'
-const TAG_SRC = '1A4DEMO0000000000000481'
-const TAG_TEST = '1A4DEMO0000000000000517'
-const TAG_PKG = '1A4DEMO0000000000000530'
+const TEAM = TEAM_LIST.join(', ')
 
 /* ── Dry Rooms ─────────────────────────────────────────────── */
 
@@ -241,12 +237,7 @@ export const flower: DemoWorkflow = {
         },
         {
           screen: dryRooms([]),
-          modal: {
-            title: 'Select Harvest Date',
-            subtitle: 'Select the date of the harvests you want to import from METRC',
-            fields: [{ label: '', kind: 'date', value: '09/22/2026' }],
-            confirm: 'Load Harvests',
-          },
+          modal: { real: SelectHarvestDateModal, confirm: 'Load Harvests' },
           note: 'Choose the harvest date',
         },
         {

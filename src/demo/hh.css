@@ -1,0 +1,36 @@
+/* HarvestHub (Tailwind) styles for the demo's recreated modals, scoped to .hh-app. */
+@tailwind components;
+@tailwind utilities;
+
+/* Minimal preflight, scoped: what Tailwind utilities assume about borders and form controls. */
+.hh-app,
+.hh-app *,
+.hh-app *::before,
+.hh-app *::after {
+  box-sizing: border-box;
+  border-width: 0;
+  border-style: solid;
+  border-color: #e5e7eb;
+}
+
+.hh-app {
+  color: #111827;
+  font-size: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+  line-height: 1.5;
+}
+
+.hh-app h1, .hh-app h2, .hh-app h3, .hh-app h4, .hh-app p { margin: 0; font-size: inherit; font-weight: inherit; }
+.hh-app h1, .hh-app h2, .hh-app h3, .hh-app h4 { font-size: inherit; }
+.hh-app button, .hh-app input, .hh-app select, .hh-app textarea {
+  font: inherit;
+  color: inherit;
+  margin: 0;
+  background-color: transparent;
+}
+.hh-app button { cursor: default; text-transform: none; }
+.hh-app input, .hh-app select, .hh-app textarea { pointer-events: none; }
+.hh-app input::placeholder, .hh-app textarea::placeholder { color: #9ca3af; opacity: 1; }
+.hh-app svg { display: inline-block; vertical-align: middle; }
+.hh-app img { display: block; max-width: 100%; }
+.hh-app ul, .hh-app ol { list-style: none; margin: 0; padding: 0; }

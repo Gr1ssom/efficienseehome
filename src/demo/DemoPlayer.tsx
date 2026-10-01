@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type Ref } from 'react'
 import type { Cell, DemoFrame, DemoModal, DemoScreen, DemoStep, DemoWorkflow, Field, SidebarSection } from './types'
 import styles from './DemoPlayer.module.css'
+import './hh.css'
+import { HotContext } from './hh/hotContext'
 
 type Mode = 'watch' | 'guided'
 
@@ -261,6 +263,22 @@ function ModalView({ m, targetRef, onAct }: { m: DemoModal } & Omit<HotProps, 'h
   )
 }
 
+/** Scrolls the target's scrollable ancestors inside `win` (page, modal body) so it is visible. */
+function revealInWindow(target: HTMLElement, win: HTMLElement) {
+  for (let el = target.parentElement; el && el !== win; el = el.parentElement) {
+    const style = getComputedStyle(el)
+    if (!/(auto|scroll)/.test(style.overflowY) || el.scrollHeight <= el.clientHeight) continue
+    const box = el.getBoundingClientRect()
+    const t = target.getBoundingClientRect()
+    if (t.bottom > box.bottom - 12) el.scrollTop += t.bottom - box.bottom + 24
+    else if (t.top < box.top + 12) el.scrollTop -= box.top - t.top + 24
+  }
+}
+
+function resetScroll(el: HTMLElement) {
+  el.scrollTop = 0
+}
+
 export default function DemoPlayer({ workflow, sidebar, mode, onModeChange, onFinish }: Props) {
   const [index, setIndex] = useState(0)
   const [frame, setFrame] = useState(0)
@@ -271,7 +289,7 @@ export default function DemoPlayer({ workflow, sidebar, mode, onModeChange, onFi
 
   const windowRef = useRef<HTMLDivElement>(null)
   const pageRef = useRef<HTMLDivElement>(null)
-  const targetRef = useRef<HTMLButtonElement>(null)
+  const [target, setTarget] = useState<HTMLButtonElement | null>(null)
 
   const playing = mode === 'watch' && !paused
   const step = workflow.steps[index]
@@ -306,13 +324,16 @@ export default function DemoPlayer({ workflow, sidebar, mode, onModeChange, onFi
     else setDone(true)
   }, [done, frame, frames.length, next])
 
-  // Track the highlighted control so the demo cursor can glide to it.
+  // Bring the highlighted control into view (scrolling only the mock window's own
+  // scroll areas, never the website), then glide the demo cursor to it.
   useLayoutEffect(() => {
+    const page = pageRef.current
     const win = windowRef.current
-    if (!win || done) return
+    if (!win) return
+    if (page && frame === 0 && !done && (!target || !page.contains(target))) resetScroll(page)
+    if (!target || done) return
+    revealInWindow(target, win)
     const place = () => {
-      const target = targetRef.current
-      if (!target) return
       const w = win.getBoundingClientRect()
       const t = target.getBoundingClientRect()
       setCursor({ x: t.left - w.left + t.width * 0.6, y: t.top - w.top + t.height * 0.65 })
@@ -321,22 +342,7 @@ export default function DemoPlayer({ workflow, sidebar, mode, onModeChange, onFi
     const ro = new ResizeObserver(place)
     ro.observe(win)
     return () => ro.disconnect()
-  }, [index, frame, done, workflow.id])
-
-  // Keep the highlighted control in view by scrolling only the mock page, never the site.
-  useLayoutEffect(() => {
-    const page = pageRef.current
-    const target = targetRef.current
-    if (!page) return
-    if (!target || !page.contains(target)) {
-      if (frame === 0 && !done) page.scrollTop = 0
-      return
-    }
-    const p = page.getBoundingClientRect()
-    const t = target.getBoundingClientRect()
-    if (t.bottom > p.bottom - 12) page.scrollTop += t.bottom - p.bottom + 24
-    else if (t.top < p.top + 12) page.scrollTop -= p.top - t.top + 24
-  }, [index, frame, done])
+  }, [target, index, frame, done, workflow.id])
 
   // Autoplay ("video") mode.
   useEffect(() => {
@@ -442,12 +448,20 @@ export default function DemoPlayer({ workflow, sidebar, mode, onModeChange, onFi
               <ScreenView
                 s={screen}
                 hot={!done && !current.modal}
-                targetRef={targetRef}
+                targetRef={setTarget}
                 onAct={act}
               />
             </div>
 
-              {!done && current.modal && <ModalView m={current.modal} targetRef={targetRef} onAct={act} />}
+              {!done && current.modal && ('real' in current.modal
+                ? (
+                  <div className={`hh-app ${styles.realHost}`}>
+                    <HotContext.Provider value={{ bind: setTarget, onClick: act, className: styles.hot }}>
+                      <current.modal.real />
+                    </HotContext.Provider>
+                  </div>
+                )
+                : <ModalView m={current.modal} targetRef={setTarget} onAct={act} />)}
 
               {done && (
                 <div className={styles.toast} role="status">
