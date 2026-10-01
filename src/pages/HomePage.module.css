@@ -94,7 +94,7 @@
   margin: 0 auto;
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 80px;
   align-items: center;
   position: relative;
@@ -941,7 +941,7 @@
 
 @media (max-width: 900px) {
   .heroInner {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 56px;
   }
 
@@ -981,7 +981,29 @@
 
 @media (max-width: 640px) {
   .hero {
-    padding: 80px 20px 72px;
+    padding: 80px 16px 72px;
+    min-height: auto;
+  }
+
+  .heroLine1,
+  .heroLine2,
+  .heroLine3 {
+    font-size: clamp(38px, 11.5vw, 52px);
+    letter-spacing: -1.5px;
+  }
+
+  .heroDesc {
+    font-size: 16px;
+  }
+
+  .heroActions > a {
+    flex: 1 1 auto;
+    justify-content: center;
+    min-height: 48px;
+  }
+
+  .scrollHint {
+    display: none;
   }
 
   .heroStats {
@@ -990,7 +1012,9 @@
   }
 
   .chainSteps {
-    flex-direction: column;
-    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px 12px;
+    justify-items: center;
   }
 }

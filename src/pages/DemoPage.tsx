@@ -36,7 +36,12 @@ export default function DemoPage() {
     setFinished(false)
     setMode(m)
     setParams({ workflow: w.id }, { replace: true })
-    window.setTimeout(() => playerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 60)
+    // On phones, land on the player controls so the caption and app window follow directly.
+    window.setTimeout(() => {
+      const section = playerRef.current
+      const anchor = window.innerWidth <= 640 ? section?.querySelector<HTMLElement>('[data-player-top]') : section
+      anchor?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }, 60)
   }
 
   return (

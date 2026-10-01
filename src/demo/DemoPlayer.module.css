@@ -13,6 +13,7 @@
 
 /* ── Controls ─────────────────────────────────────────────── */
 .controls {
+  scroll-margin-top: 76px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -91,12 +92,24 @@
 .stage {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 300px;
-  gap: 20px;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    'window top'
+    'window rest';
+  column-gap: 20px;
   align-items: start;
 }
 
+.window { grid-area: window; }
+
+/* Phones and tablets: caption above the window, details below it */
 @media (max-width: 1020px) {
-  .stage { grid-template-columns: minmax(0, 1fr); }
+  .stage {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto;
+    grid-template-areas: 'top' 'window' 'rest';
+    row-gap: 12px;
+  }
 }
 
 .window {
@@ -585,14 +598,42 @@
 }
 
 /* ── Narration ────────────────────────────────────────────── */
-.narration {
+.narrTop,
+.narrRest {
   display: flex;
   flex-direction: column;
   gap: 10px;
   padding: 20px;
   background: rgba(255,255,255,0.03);
   border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 14px;
+  min-width: 0;
+}
+
+/* Desktop: the two parts read as one card beside the window */
+.narrTop {
+  grid-area: top;
+  border-radius: 14px 14px 0 0;
+  border-bottom: 0;
+  padding-bottom: 6px;
+}
+
+.narrRest {
+  grid-area: rest;
+  border-radius: 0 0 14px 14px;
+  border-top: 0;
+  padding-top: 6px;
+}
+
+@media (max-width: 1020px) {
+  .narrTop,
+  .narrRest {
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+    padding: 14px 16px;
+  }
+
+  .narrTop { gap: 6px; }
+  .narrTop .stepHeading { font-size: 17px; }
 }
 
 .stepNum {
@@ -1033,4 +1074,36 @@
   inset: 0;
   z-index: 4;
   animation: fade 200ms ease;
+}
+
+/* ── Phones ──────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  /* Window + caption fit one screen, from iPhone SE to Pro Max */
+  .app { height: clamp(440px, calc(100svh - 210px), 620px); }
+
+  .chrome { padding: 8px 10px; }
+  .url { margin-left: 6px; font-size: 11px; }
+  .v1Tag { font-size: 10px; padding: 2px 6px; }
+
+  .controls { gap: 8px; }
+  .modeSwitch { flex: 1 1 auto; }
+  .modeBtn, .modeActive { flex: 1 1 0; min-height: 40px; }
+
+  /* Step list becomes one sideways-scrolling strip */
+  .rail {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    margin: 6px -16px 0;
+    padding: 12px 16px 2px;
+  }
+  .rail::-webkit-scrollbar { display: none; }
+  .rail li { flex-shrink: 0; }
+  .railItem, .railActive, .railDone { white-space: nowrap; min-height: 36px; }
+}
+
+@media (pointer: coarse), (max-width: 640px) {
+  .iconBtn { width: 44px; height: 44px; }
+  .nextBtn { min-height: 44px; }
 }

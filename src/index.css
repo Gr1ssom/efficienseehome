@@ -51,7 +51,9 @@ body {
   font-size: 16px;
   line-height: 1.5;
   color: var(--neutral-800);
-  background: #fff;
+  background: #080f18;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
 }
 
