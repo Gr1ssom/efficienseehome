@@ -1,4 +1,5 @@
 /* HarvestHub (Tailwind) styles for the demo's recreated modals, scoped to .hh-app. */
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
 

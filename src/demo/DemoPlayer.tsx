@@ -267,11 +267,16 @@ function ModalView({ m, targetRef, onAct }: { m: DemoModal } & Omit<HotProps, 'h
 function revealInWindow(target: HTMLElement, win: HTMLElement) {
   for (let el = target.parentElement; el && el !== win; el = el.parentElement) {
     const style = getComputedStyle(el)
-    if (!/(auto|scroll)/.test(style.overflowY) || el.scrollHeight <= el.clientHeight) continue
     const box = el.getBoundingClientRect()
     const t = target.getBoundingClientRect()
-    if (t.bottom > box.bottom - 12) el.scrollTop += t.bottom - box.bottom + 24
-    else if (t.top < box.top + 12) el.scrollTop -= box.top - t.top + 24
+    if (/(auto|scroll)/.test(style.overflowY) && el.scrollHeight > el.clientHeight) {
+      if (t.bottom > box.bottom - 12) el.scrollTop += t.bottom - box.bottom + 24
+      else if (t.top < box.top + 12) el.scrollTop -= box.top - t.top + 24
+    }
+    if (/(auto|scroll)/.test(style.overflowX) && el.scrollWidth > el.clientWidth) {
+      if (t.right > box.right - 8) el.scrollLeft += t.right - box.right + 16
+      else if (t.left < box.left + 8) el.scrollLeft -= box.left - t.left + 16
+    }
   }
 }
 

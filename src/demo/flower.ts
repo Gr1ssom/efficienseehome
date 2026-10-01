@@ -3,8 +3,29 @@ import SelectHarvestsToImportModal from './hh/modals/SelectHarvestsToImportModal
 import MetrcHarvestCreateModal from './hh/modals/MetrcHarvestCreateModal'
 import MissingMoistureReadingsModal from './hh/modals/MissingMoistureReadingsModal'
 import MoistureLogModal from './hh/modals/MoistureLogModal'
+import BuckingStartModal from './hh/modals/BuckingStartModal'
+import RecordBuckingWeightsModal from './hh/modals/RecordBuckingWeightsModal'
+import SortingStartModal from './hh/modals/SortingStartModal'
+import SortingCompleteModal from './hh/modals/SortingCompleteModal'
+import CreateBurpListModal from './hh/modals/CreateBurpListModal'
+import ReadyForTrimModal from './hh/modals/ReadyForTrimModal'
+import TrimStartWeightModal from './hh/modals/TrimStartWeightModal'
+import TrimBagInputModal from './hh/modals/TrimBagInputModal'
+import AssignTrimEmployeeModal from './hh/modals/AssignTrimEmployeeModal'
+import TrimBagWeighingModal from './hh/modals/TrimBagWeighingModal'
+import TrimQCModal from './hh/modals/TrimQCModal'
+import CreateTestingBatchesModal from './hh/modals/CreateTestingBatchesModal'
+import SendToTestingModal from './hh/modals/SendToTestingModal'
+import TestResultsModal from './hh/modals/TestResultsModal'
+import AllocateModal from './hh/modals/AllocateModal'
+import LabelCreatorStep1Modal from './hh/modals/LabelCreatorStep1Modal'
+import LabelCreatorStep2Modal from './hh/modals/LabelCreatorStep2Modal'
+import LabelPreviewModal from './hh/modals/LabelPreviewModal'
+import StartMachinePackagingModal from './hh/modals/StartMachinePackagingModal'
+import CompleteMachineRunModal from './hh/modals/CompleteMachineRunModal'
+import FulfillmentCheckInModal from './hh/modals/FulfillmentCheckInModal'
 import SelectHarvestDateModal from './hh/modals/SelectHarvestDateModal'
-import { BATCH, STRAIN, TAG_PKG, TAG_SRC, TAG_TEST, TEAM as TEAM_LIST } from './hh/demoData'
+import { BATCH, STRAIN, TAG_PKG, TAG_SRC, TAG_TEST } from './hh/demoData'
 
 /*
  * Flower walkthrough, click for click as HarvestHub V1 runs it today:
@@ -18,7 +39,6 @@ import { BATCH, STRAIN, TAG_PKG, TAG_SRC, TAG_TEST, TEAM as TEAM_LIST } from './
  * results from it and never writes back.
  */
 
-const TEAM = TEAM_LIST.join(', ')
 
 /* ── Dry Rooms ─────────────────────────────────────────────── */
 
@@ -301,22 +321,7 @@ export const flower: DemoWorkflow = {
         },
         {
           screen: bucking([{ title: `#1 ${BATCH}`, fields: [['Plants:', '120'], ['Wet Weight:', '139,400g']] }], [], []),
-          modal: {
-            title: 'Start Bucking',
-            subtitle: `Batch: ${BATCH}`,
-            fields: [
-              { label: 'Taking Tops', kind: 'checks', checks: [{ label: 'Taking Tops', checked: false }] },
-              { label: 'Date', kind: 'date', required: true, value: '10/01/2026', half: true },
-              { label: 'Start Time', kind: 'time', required: true, value: '07:30 AM', half: true },
-              { label: 'End Time (optional)', kind: 'time', value: '--:--' },
-              {
-                label: 'Select Team Members * (4 selected)', kind: 'checks',
-                checks: TEAM.split(', ').map((n) => ({ label: n, checked: true })),
-              },
-              { label: 'Pre-filled from last session — deselect anyone not joining today.', kind: 'note' },
-            ],
-            confirm: 'Start Bucking',
-          },
+          modal: { real: BuckingStartModal, confirm: 'Start Bucking' },
           note: 'Pick the crew',
         },
         {
@@ -337,20 +342,7 @@ export const flower: DemoWorkflow = {
         },
         {
           screen: bucking([], [], [{ title: BATCH, tags: [{ text: 'Finalized', tone: 'purple' }], fields: [['Plants:', '120']] }]),
-          modal: {
-            title: 'Record Weights & Send to Sorting',
-            subtitle: 'Projected dry weight: 32062g',
-            fields: [
-              {
-                label: '', kind: 'summary',
-                rows: [['Strain:', STRAIN], ['Room:', 'Dry Room 2'], ['Plants:', '120'], ['Start Time:', '7:30 AM'], ['Team:', TEAM]],
-              },
-              { label: 'Bucking Waste (grams)', required: true, value: '4870', half: true },
-              { label: 'Untrimmed Weight (g)', required: true, value: '31940', half: true },
-              { label: 'Confirm End Time', kind: 'time', required: true, value: '02:22 PM', help: 'Sessions ended at finalization — adjust if needed.' },
-            ],
-            confirm: 'Record & Send to Sorting',
-          },
+          modal: { real: RecordBuckingWeightsModal, confirm: 'Record & Send to Sorting' },
           note: 'Record bucking waste and untrimmed weight',
         },
       ],
@@ -372,21 +364,7 @@ export const flower: DemoWorkflow = {
         },
         {
           screen: sorting([{ title: BATCH, fields: [['Untrimmed:', '31,940g']] }], []),
-          modal: {
-            title: 'Start Sorting',
-            fields: [
-              { label: '', kind: 'summary', rows: [['Strain:', STRAIN], ['Room:', 'Dry Room 2'], ['Untrimmed Weight:', '31940g']] },
-              { label: 'Starting Weight (g)', required: true, value: '31940' },
-              {
-                label: 'Team Members * (Select one or more)', kind: 'checks',
-                checks: [{ label: 'K. Patel', checked: true }, { label: 'B. Lee', checked: true }, { label: 'A. Diaz', checked: false }],
-              },
-              { label: 'VAC 1 (%)', value: '62', half: true },
-              { label: 'VAC 2 (%)', value: '58', half: true },
-              { label: 'Feeder Speed', value: '4' },
-            ],
-            confirm: 'Start Sorting',
-          },
+          modal: { real: SortingStartModal, confirm: 'Start Sorting' },
           note: 'Starting weight, team and machine settings',
         },
         {
@@ -398,25 +376,7 @@ export const flower: DemoWorkflow = {
         },
         {
           screen: sorting([], [{ title: BATCH, fields: [['Start Weight:', '31,940g']] }]),
-          modal: {
-            title: 'Complete Sorting',
-            wide: true,
-            fields: [
-              { label: '', kind: 'summary', rows: [['Strain:', STRAIN], ['Room:', 'Dry Room 2'], ['Sorted By:', 'K. Patel, B. Lee']] },
-              { label: 'Bud Grade Weights', kind: 'heading' },
-              { label: 'AAA Buds (g)', value: '14250', half: true },
-              { label: 'AAA Totes', value: '4', half: true },
-              { label: 'A Buds (g)', value: '9880', half: true },
-              { label: 'A Totes', value: '3', half: true },
-              { label: 'B Buds (g)', value: '5120', half: true },
-              { label: 'B Totes', value: '2', half: true },
-              { label: 'Sorting Trim (g)', value: '1980', half: true, help: 'Auto-added to Pre-Roll Collecting queue.' },
-              { label: 'Fan Leaves (g)', value: '610', half: true, help: 'Auto-added to Extraction Collection.' },
-              { label: 'End Time', kind: 'time', required: true, value: '01:40 PM' },
-              { label: 'Microbial Check', kind: 'checks', checks: [{ label: 'Microbials Checked', checked: true }] },
-            ],
-            confirm: 'Complete Sorting',
-          },
+          modal: { real: SortingCompleteModal, confirm: 'Complete Sorting' },
           note: 'Every gram accounted for by grade',
         },
       ],
@@ -435,16 +395,7 @@ export const flower: DemoWorkflow = {
         },
         {
           screen: cure([cureCard(true)], { focusCard: [0, 0] }),
-          modal: {
-            title: 'Create Burp List',
-            fields: [
-              { label: 'Scheduled Date', kind: 'date', value: '10/05/2026' },
-              { label: 'Configure Burp Settings for Each Cultivar', kind: 'heading' },
-              { label: BATCH, kind: 'checks', checks: [{ label: 'Timed', checked: true }, { label: 'FAE', checked: false }] },
-              { label: 'Duration (minutes)', kind: 'checks', checks: [{ label: '5 min', checked: false }, { label: '10 min', checked: false }, { label: '15 min', checked: true }, { label: '30 min', checked: false }] },
-            ],
-            confirm: 'Create Burp List',
-          },
+          modal: { real: CreateBurpListModal, confirm: 'Create Burp List' },
           note: 'Timed burp, 15 minutes',
         },
       ],
@@ -463,21 +414,7 @@ export const flower: DemoWorkflow = {
         },
         {
           screen: cure([cureCard(false, '11.2%', '0.60 Aw')], { focusCard: [0, 0] }),
-          modal: {
-            title: 'Ready for Trim',
-            fields: [
-              { label: '', kind: 'summary', rows: [['Strain:', STRAIN], ['Room:', 'Cure Room']] },
-              { label: 'Final Moisture Percentage', required: true, value: '11.2', half: true },
-              { label: 'Water Activity', required: true, value: '0.60', half: true },
-              { label: 'Bud Weights by Grade (grams)', kind: 'heading', value: 'from sorting' },
-              { label: 'AAA Bud', value: '14250', half: true },
-              { label: 'A Bud', value: '9880', half: true },
-              { label: 'B Bud', value: '5120', half: true },
-              { label: 'Trim Weight (grams)', value: '0', half: true },
-              { label: '', kind: 'summary', rows: [['Bud Subtotal (AAA + A + B):', '29,250g'], ['Total Weight:', '29,250g']] },
-            ],
-            confirm: 'Move to Trim',
-          },
+          modal: { real: ReadyForTrimModal, confirm: 'Move to Trim' },
           note: 'Final moisture and water activity',
         },
       ],
@@ -499,17 +436,7 @@ export const flower: DemoWorkflow = {
         },
         {
           screen: trim([[{ title: BATCH, fields: [['Sent to Trim', '24,130g']] }], [], [], []]),
-          modal: {
-            title: 'Verify Start Weight',
-            subtitle: 'Verified By: lead.trim',
-            fields: [
-              { label: 'AAA Buds', value: '14250', half: true, help: 'Expected: 14250g' },
-              { label: 'A Buds', value: '9880', half: true, help: 'Expected: 9880g' },
-              { label: 'B Buds (set aside)', value: '5120' },
-              { label: '', kind: 'summary', rows: [['Total Verified (AAA + A):', '24,130g'], ['Expected (AAA + A):', '24,130g']] },
-            ],
-            confirm: 'Verify Weight',
-          },
+          modal: { real: TrimStartWeightModal, confirm: 'Verify Weight' },
           note: 'Matches sorting to the gram',
         },
         {
@@ -521,16 +448,7 @@ export const flower: DemoWorkflow = {
         },
         {
           screen: trim([[{ title: BATCH, fields: [['Verified', '24,130g']] }], [], [], []]),
-          modal: {
-            title: `Weigh Bags - ${BATCH}`,
-            fields: [
-              { label: 'Bag 14 · Weight (grams)', kind: 'scale', value: '1,724.0 g' },
-              { label: 'Tops bag', kind: 'checks', checks: [{ label: 'Tops bag', checked: false }] },
-              { label: 'Assign to Employee (Optional)', kind: 'select', value: '' },
-              { label: '', kind: 'summary', rows: [['Available to Allocate:', '24,130g'], ['Total Weight:', '24,130g'], ['Remaining:', '0g']] },
-            ],
-            confirm: 'Save Bags',
-          },
+          modal: { real: TrimBagInputModal, confirm: 'Save Bags' },
           note: '14 bags weighed on the scale',
         },
         {
@@ -542,14 +460,7 @@ export const flower: DemoWorkflow = {
         },
         {
           screen: trim([[], [{ title: 'Bag #3 · 1,724g' }], [], []]),
-          modal: {
-            title: 'Assign Trim Employee',
-            fields: [
-              { label: 'Search employees...', kind: 'select', value: 'L. Park' },
-              { label: 'Tap an employee to hand out the bag', kind: 'note' },
-            ],
-            confirm: 'L. Park',
-          },
+          modal: { real: AssignTrimEmployeeModal, confirm: 'L. Park' },
           note: 'Bag handed out and timed',
         },
         {
@@ -562,22 +473,7 @@ export const flower: DemoWorkflow = {
         },
         {
           screen: trim([[], [], [{ title: 'Bag #3 · L. Park' }], []]),
-          modal: {
-            title: 'Weigh Trimmed Bag',
-            wide: true,
-            fields: [
-              { label: 'Trimmed AAA (grams)', value: '1010', half: true },
-              { label: 'Trimmed A (grams)', value: '312', half: true },
-              { label: 'Trimmed B (grams)', value: '205', half: true },
-              { label: 'Trim (grams)', value: '168', half: true },
-              { label: 'Stem Weight (grams)', value: '21', half: true },
-              { label: 'Damaged (grams)', value: '6', half: true },
-              { label: 'Start Time', kind: 'time', value: '09:12 AM', half: true, help: 'Central Time' },
-              { label: 'End Time', kind: 'time', value: '11:53 AM', half: true, help: 'Central Time' },
-              { label: '', kind: 'summary', rows: [['Total:', '1,722g'], ['Expected:', '1,724g'], ['Difference:', '-2g']] },
-            ],
-            confirm: 'Complete Weighing',
-          },
+          modal: { real: TrimBagWeighingModal, confirm: 'Complete Weighing' },
           note: 'Weighed back by grade',
         },
         {
@@ -607,25 +503,7 @@ export const flower: DemoWorkflow = {
         },
         {
           screen: trimQC([{ title: BATCH, fields: [['Total:', '27,610g']] }], [], []),
-          modal: {
-            title: 'Trim QC',
-            subtitle: `${BATCH} · QC Performed By: qc.lead`,
-            wide: true,
-            fields: [
-              { label: 'Microbial Check', kind: 'checks', checks: [{ label: 'Microbials Checked', checked: true }] },
-              { label: 'Batch Photo', value: '📷 batch.jpg', half: true },
-              { label: 'Average Nug Photo', value: '📷 nug.jpg', half: true },
-              { label: 'Moisture %', required: true, value: '11.0', half: true },
-              { label: 'Water Activity', required: true, value: '0.600', half: true },
-              { label: 'Bud Weight, Quality & Totes', kind: 'heading' },
-              { label: 'AAA Bud · Weight (g) / Totes / Grade', required: true, value: '13940 · 4 · A' },
-              { label: 'A Bud · Weight (g) / Totes / Grade', required: true, value: '5610 · 2 · A' },
-              { label: 'B Bud · Weight (g) / Totes / Grade', required: true, value: '8060 · 3 · B' },
-              { label: 'Wasted Weight (g)', required: true, value: '38', half: true },
-              { label: 'Sifted During QC (g)', required: true, value: '22', half: true },
-            ],
-            confirm: 'Complete QC',
-          },
+          modal: { real: TrimQCModal, confirm: 'Complete QC' },
           note: 'Photos, readings and graded weights',
         },
       ],
@@ -645,23 +523,7 @@ export const flower: DemoWorkflow = {
         },
         {
           screen: vr([vrCard]),
-          modal: {
-            title: 'Create Testing Batches',
-            subtitle: `${STRAIN} — HD 09/22 — Total: 27610g (60.9 lbs)`,
-            wide: true,
-            fields: [
-              { label: 'Is this batch prepacked or bulk?', kind: 'checks', checks: [{ label: 'Prepacked', checked: false }, { label: 'Bulk', checked: true }] },
-              { label: 'Testing Batch #1', kind: 'heading', value: '15.0 / 15.0 lbs' },
-              { label: 'Source Tag', required: true, value: TAG_SRC, half: true },
-              { label: 'Test Tag', required: true, value: TAG_TEST, half: true },
-              { label: 'Lot Type', kind: 'select', required: true, value: 'A Bud', half: true },
-              { label: 'Test Date', kind: 'date', required: true, value: '10/10/2026', half: true },
-              { label: 'AAA Buds (g)', value: '6800', half: true },
-              { label: 'A Buds (g)', value: '0', half: true },
-              { label: 'Weight Verified', kind: 'checks', checks: [{ label: 'Weight Verified', checked: true }] },
-            ],
-            confirm: 'Create Partial Batch',
-          },
+          modal: { real: CreateTestingBatchesModal, confirm: 'Create Partial Batch' },
           note: '15 lbs of AAA into Testing Batch #1',
         },
       ],
@@ -681,17 +543,7 @@ export const flower: DemoWorkflow = {
         },
         {
           screen: testing([testCard()], []),
-          modal: {
-            title: 'Send to Testing',
-            fields: [
-              { label: '', kind: 'summary', rows: [['Source Tag:', TAG_SRC], ['Test Tag:', TAG_TEST], ['Total Weight:', '6800g']] },
-              { label: 'Testing Company', kind: 'select', required: true, value: 'GPA' },
-              { label: 'Weight Taken by Testing (grams)', required: true, value: '30', half: true },
-              { label: 'Bud Grade Weight Was Taken From', kind: 'select', required: true, value: 'AAA', half: true },
-              { label: '', kind: 'summary', rows: [['Remaining after testing:', '6,770g'], ['Deducted from:', 'AAA']] },
-            ],
-            confirm: 'Send to Testing',
-          },
+          modal: { real: SendToTestingModal, confirm: 'Send to Testing' },
           note: 'Grams taken by the lab are recorded',
         },
         {
@@ -700,20 +552,7 @@ export const flower: DemoWorkflow = {
         },
         {
           screen: testing([], [testCard(true)]),
-          modal: {
-            title: 'Test Results',
-            subtitle: 'Search METRC · Manual Entry',
-            wide: true,
-            fields: [
-              { label: 'License Code', required: true, value: 'CUL000032', half: true },
-              { label: 'Source Tag', required: true, value: TAG_SRC, half: true },
-              {
-                label: 'Found in METRC', kind: 'summary',
-                rows: [['Total THC', '27.8%'], ['Delta-9 THC', '0.9%'], ['THCA', '30.6%'], ['Total Terpenes', '2.41%'], ['Moisture', '11.0%'], ['COA', '✓ PDF attached']],
-              },
-            ],
-            confirm: 'Save Test Results',
-          },
+          modal: { real: TestResultsModal, confirm: 'Save Test Results' },
           note: 'Search METRC by source tag',
         },
       ],
@@ -736,23 +575,8 @@ export const flower: DemoWorkflow = {
         },
         {
           screen: allocation([{ title: `HD 09/22 · ${STRAIN}` }]),
-          modal: {
-            title: `HD 09/22 · ${STRAIN}`,
-            subtitle: 'Remaining to Allocate · AAA Grade 6,770g',
-            wide: true,
-            fields: [
-              { label: 'Product Allocation (grams)', kind: 'heading' },
-              { label: 'RESERVE 3.5g Jars · AAA', value: '1600 units', half: true, help: 'Enter UNITS (1 unit = 3.5g)' },
-              { label: 'Packs 3.5g · AAA', value: '1170', half: true },
-              {
-                label: 'Batch Info', kind: 'summary',
-                rows: [['Tag', TAG_TEST], ['Total Weight', '6,770g'], ['Total THC', '27.8%'], ['Total Terpenes', '2.41%']],
-              },
-              { label: 'Remaining: 0g', kind: 'note' },
-            ],
-            confirm: 'Send to Packaging Teams',
-          },
-          note: 'RESERVE 3.5g jars and Packs 3.5g',
+          modal: { real: AllocateModal, confirm: 'Send to Packaging Teams' },
+          note: 'RESERVE 3.5g Jars (1,600 units) and Robust 3.5g Bags',
         },
       ],
       after: allocation([]),
@@ -769,63 +593,30 @@ export const flower: DemoWorkflow = {
           screen: packaging([
             [{ pill: 'Labels Needing Printed', tone: 'amber' }, 'RESERVE 3.5g Jars', BATCH, '1,600'],
             [{ pill: 'Pending Assignment', tone: 'gray' }, 'RESERVE 3.5g Jars', BATCH, '1,600'],
-            [{ pill: 'Pending Assignment', tone: 'gray' }, 'Packs 3.5g', BATCH, '334'],
+            [{ pill: 'Pending Assignment', tone: 'gray' }, 'Robust 3.5g Bags', BATCH, '254'],
           ], { focusRow: 0, action: 'Print Labels', actionOn: 'row' }),
           note: 'Print Labels',
         },
         {
           screen: packaging([[{ pill: 'Labels Needing Printed', tone: 'amber' }, 'RESERVE 3.5g Jars', BATCH, '1,600']]),
-          modal: {
-            title: 'Label Creator',
-            subtitle: 'Step 1: Retrieve Test Results from METRC',
-            fields: [
-              { label: 'License Code', value: 'CUL000032', half: true },
-              { label: 'Source Package Tag', value: TAG_SRC, half: true },
-              {
-                label: 'Stored Test Results (From Testing Tab)', kind: 'summary',
-                rows: [['Total THC', '27.8%'], ['THCA', '30.6%'], ['Total Terpenes', '2.41%']],
-              },
-              {
-                label: 'Retrieved from METRC', kind: 'summary',
-                rows: [['Total THC', '27.8% ✓'], ['THCA', '30.6% ✓'], ['Total Terpenes', '2.41% ✓']],
-              },
-            ],
-            confirm: 'Next: Source Package Tag & Units',
-          },
+          modal: { real: LabelCreatorStep1Modal, confirm: 'Next: Source Package Tag & Units' },
           note: 'Stored and METRC results match',
         },
         {
           screen: packaging([[{ pill: 'Labels Needing Printed', tone: 'amber' }, 'RESERVE 3.5g Jars', BATCH, '1,600']]),
-          modal: {
-            title: 'Label Creator',
-            subtitle: 'Step 2: Source Package Tag & Units',
-            fields: [
-              { label: 'Source Package Tag', required: true, value: TAG_SRC },
-              { label: 'Number of Units to Print', required: true, value: '1600' },
-            ],
-            confirm: 'Preview & Export',
-          },
+          modal: { real: LabelCreatorStep2Modal, confirm: 'Preview & Export' },
           note: '1,600 labels',
         },
         {
           screen: packaging([[{ pill: 'Labels Needing Printed', tone: 'amber' }, 'RESERVE 3.5g Jars', BATCH, '1,600']]),
-          modal: {
-            title: 'Label Preview',
-            fields: [
-              {
-                label: `${STRAIN} · 3.5g`, kind: 'summary',
-                rows: [['Total THC', '27.8%'], ['Total Terpenes', '2.41%'], ['Test Tag', TAG_TEST], ['Batch', BATCH]],
-              },
-            ],
-            confirm: 'Confirm & Export',
-          },
+          modal: { real: LabelPreviewModal, confirm: 'Confirm & Export' },
           note: 'Check the label, then export',
         },
       ],
       after: packaging([
         [{ pill: 'Printed', tone: 'green' }, 'RESERVE 3.5g Jars', BATCH, '1,600'],
         [{ pill: 'Pending Assignment', tone: 'gray' }, 'RESERVE 3.5g Jars', BATCH, '1,600'],
-        [{ pill: 'Pending Assignment', tone: 'gray' }, 'Packs 3.5g', BATCH, '334'],
+        [{ pill: 'Pending Assignment', tone: 'gray' }, 'Robust 3.5g Bags', BATCH, '254'],
       ]),
       result: 'Exported 1600 labels to JSON',
     },
@@ -838,28 +629,20 @@ export const flower: DemoWorkflow = {
         {
           screen: packaging([
             [{ pill: 'Pending Assignment', tone: 'gray' }, 'RESERVE 3.5g Jars', BATCH, '1,600'],
-            [{ pill: 'Pending Assignment', tone: 'gray' }, 'Packs 3.5g', BATCH, '334'],
+            [{ pill: 'Pending Assignment', tone: 'gray' }, 'Robust 3.5g Bags', BATCH, '254'],
           ], { focusRow: 0, action: 'Machine', actionOn: 'row' }),
           note: 'Machine',
         },
         {
           screen: packaging([
             [{ pill: 'Machine Packaging', tone: 'blue' }, 'RESERVE 3.5g Jars', BATCH, '1,600'],
-            [{ pill: 'Pending Assignment', tone: 'gray' }, 'Packs 3.5g', BATCH, '334'],
+            [{ pill: 'Pending Assignment', tone: 'gray' }, 'Robust 3.5g Bags', BATCH, '254'],
           ], { focusRow: 0, action: 'Start', actionOn: 'row' }),
           note: 'Assigned to Machine Packaging',
         },
         {
           screen: packaging([[{ pill: 'Machine Packaging', tone: 'blue' }, 'RESERVE 3.5g Jars', BATCH, '1,600']]),
-          modal: {
-            title: 'Start Machine Packaging',
-            fields: [
-              { label: 'Team Members * (Select one or more)', kind: 'checks', checks: [{ label: 'S. Moore', checked: true }, { label: 'D. Ruiz', checked: true }] },
-              { label: 'Start Time', kind: 'time', required: true, value: '07:45 AM', half: true },
-              { label: 'Weight Going Into Machine (grams)', required: true, value: '5600', half: true },
-            ],
-            confirm: 'Start Packaging',
-          },
+          modal: { real: StartMachinePackagingModal, confirm: 'Start Packaging' },
           note: 'Team, start time and weight in',
         },
         {
@@ -868,25 +651,11 @@ export const flower: DemoWorkflow = {
         },
         {
           screen: packaging([[{ pill: 'Currently Packaging', tone: 'amber' }, 'RESERVE 3.5g Jars', BATCH, '1,600']]),
-          modal: {
-            title: 'Complete Machine Run',
-            wide: true,
-            fields: [
-              { label: 'End Time', kind: 'time', required: true, value: '01:20 PM', half: true },
-              { label: 'Remaining Weight for Verification & Routing (grams)', value: '0', half: true },
-              { label: 'Was any weight left unprocessed? *', kind: 'checks', checks: [{ label: 'No', checked: true }, { label: 'Yes', checked: false }] },
-              { label: 'Was the product also cased? *', kind: 'checks', checks: [{ label: 'Yes', checked: true }, { label: 'No', checked: false }] },
-              { label: 'Cases Produced', required: true, value: '15', half: true },
-              { label: 'Units per Case', required: true, value: '100', half: true },
-              { label: 'Partial Units', required: true, value: '90', half: true },
-              { label: 'Total Sample Units', value: '10', half: true },
-            ],
-            confirm: 'Mark Complete',
-          },
+          modal: { real: CompleteMachineRunModal, confirm: 'Mark Complete' },
           note: 'Cased on the line',
         },
       ],
-      after: packaging([[{ pill: 'Pending Assignment', tone: 'gray' }, 'Packs 3.5g', BATCH, '334']]),
+      after: packaging([[{ pill: 'Pending Assignment', tone: 'gray' }, 'Robust 3.5g Bags', BATCH, '254']]),
       result: 'Packaging complete — sent to fulfillment',
     },
     {
@@ -901,27 +670,7 @@ export const flower: DemoWorkflow = {
         },
         {
           screen: fulfillment([[STRAIN, 'RESERVE 3.5g Jars', TAG_PKG, { pill: '1,600 units', tone: 'amber' }]]),
-          modal: {
-            title: 'Fulfillment Check-In',
-            subtitle: 'Quality verification before inventory release',
-            wide: true,
-            fields: [
-              { label: 'Product Information', kind: 'heading' },
-              { label: 'Brand', kind: 'select', required: true, value: 'RESERVE', half: true },
-              { label: 'Product Line', kind: 'select', required: true, value: 'RESERVE 3.5g Jars', half: true },
-              { label: 'METRC Tag', value: TAG_PKG, half: true },
-              { label: 'Approval #', required: true, value: 'A-2210', half: true },
-              {
-                label: 'Quality Verification', kind: 'checks',
-                checks: ['Strain Name Verified', 'Correct Test Tag', 'Correct METRC Src Tag', 'Product Weight', 'Cannabinoids', 'Terpene Profile'].map((l) => ({ label: l, checked: true })),
-              },
-              {
-                label: 'Unit Count Confirmation', kind: 'summary',
-                rows: [['Cases (×100 ea)', '15'], ['Partial Units', '90'], ['Total Sample Units', '10'], ['Total Units', '1,600 ✓ matches packaging']],
-              },
-            ],
-            confirm: 'Complete Check-In',
-          },
+          modal: { real: FulfillmentCheckInModal, confirm: 'Complete Check-In' },
           note: 'Every label check and the unit count',
         },
       ],
