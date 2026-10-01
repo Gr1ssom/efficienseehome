@@ -280,6 +280,11 @@ function revealInWindow(target: HTMLElement, win: HTMLElement) {
   }
 }
 
+function revealInRail(rail: HTMLElement, item: HTMLElement) {
+  if (rail.scrollWidth <= rail.clientWidth) return
+  rail.scrollLeft = item.offsetLeft - rail.offsetLeft - rail.clientWidth / 2 + item.clientWidth / 2
+}
+
 function resetScroll(el: HTMLElement) {
   el.scrollTop = 0
 }
@@ -294,6 +299,7 @@ export default function DemoPlayer({ workflow, sidebar, mode, onModeChange, onFi
 
   const windowRef = useRef<HTMLDivElement>(null)
   const pageRef = useRef<HTMLDivElement>(null)
+  const railRef = useRef<HTMLOListElement>(null)
   const [target, setTarget] = useState<HTMLButtonElement | null>(null)
 
   const playing = mode === 'watch' && !paused
@@ -349,6 +355,13 @@ export default function DemoPlayer({ workflow, sidebar, mode, onModeChange, onFi
     return () => ro.disconnect()
   }, [target, index, frame, done, workflow.id])
 
+  // Keep the current step visible in the step list (a sideways strip on phones).
+  useEffect(() => {
+    const rail = railRef.current
+    const active = rail?.children[index] as HTMLElement | undefined
+    if (rail && active) revealInRail(rail, active)
+  }, [index])
+
   // Autoplay ("video") mode.
   useEffect(() => {
     if (!playing) return
@@ -394,7 +407,7 @@ export default function DemoPlayer({ workflow, sidebar, mode, onModeChange, onFi
   return (
     <div className={styles.player}>
       {/* ── Controls ───────────────────────────────────────── */}
-      <div className={styles.controls}>
+      <div className={styles.controls} data-player-top>
         <div className={styles.modeSwitch} role="tablist" aria-label="Demo mode">
           <button role="tab" aria-selected={mode === 'watch'} className={mode === 'watch' ? styles.modeActive : styles.modeBtn} onClick={() => changeMode('watch')}>
             ▶ Watch
@@ -488,18 +501,11 @@ export default function DemoPlayer({ workflow, sidebar, mode, onModeChange, onFi
           )}
         </div>
 
-        {/* ── Narration ─────────────────────────────────────── */}
-        <div className={styles.narration}>
+        {/* ── Narration: the caption sits above the window on phones ── */}
+        <div className={styles.narrTop}>
           <span className={styles.stepNum}>Step {index + 1} · {screen.item}</span>
           <h3 className={styles.stepHeading}>{step.heading}</h3>
-          <p className={styles.stepBody}>{step.body}</p>
           {!done && current.note && <p className={styles.frameNote}>→ {current.note}</p>}
-          {step.metrc && (
-            <div className={styles.metrc}>
-              <span className={styles.metrcTag}>METRC</span>
-              <span>{step.metrc}</span>
-            </div>
-          )}
           {mode === 'guided' && (
             <p className={styles.hint}>
               {done ? 'Done. Continue to the next step.' : <>Click the glowing <strong>{hotLabel}</strong> button in the app.</>}
@@ -510,8 +516,18 @@ export default function DemoPlayer({ workflow, sidebar, mode, onModeChange, onFi
               {isLast ? 'Finish walkthrough →' : 'Next step →'}
             </button>
           )}
+        </div>
 
-          <ol className={styles.rail}>
+        <div className={styles.narrRest}>
+          <p className={styles.stepBody}>{step.body}</p>
+          {step.metrc && (
+            <div className={styles.metrc}>
+              <span className={styles.metrcTag}>METRC</span>
+              <span>{step.metrc}</span>
+            </div>
+          )}
+
+          <ol className={styles.rail} ref={railRef}>
             {workflow.steps.map((st, i) => (
               <li key={st.id}>
                 <button className={i === index ? styles.railActive : i < index ? styles.railDone : styles.railItem} onClick={() => goTo(i)}>

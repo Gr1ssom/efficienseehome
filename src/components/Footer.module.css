@@ -109,3 +109,11 @@
     gap: 28px;
   }
 }
+
+/* Comfortable tap targets on touch screens */
+@media (pointer: coarse), (max-width: 640px) {
+  .colLink {
+    display: inline-block;
+    padding: 10px 0;
+  }
+}

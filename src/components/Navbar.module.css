@@ -131,13 +131,21 @@
   color: #fff;
 }
 
+.mobileOnly {
+  display: none;
+}
+
 .burger {
   display: none;
   flex-direction: column;
   gap: 5px;
+  justify-content: center;
+  align-items: center;
+  width: 44px;
+  height: 44px;
   background: none;
   border: none;
-  padding: 4px;
+  padding: 0;
 }
 
 .line {
@@ -195,12 +203,27 @@
   }
 
   .link {
-    padding: 10px 12px;
-    font-size: 15px;
+    display: block;
+    padding: 12px 12px;
+    font-size: 16px;
+  }
+
+  .nav {
+    padding: 0 16px;
+    gap: 12px;
+  }
+
+  .actions {
+    gap: 8px;
+    margin-left: auto;
   }
 
   .burger {
     display: flex;
+  }
+
+  .mobileOnly {
+    display: block;
   }
 
   .ctaBtn,

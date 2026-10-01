@@ -45,6 +45,17 @@ export default function Navbar() {
               Demo
             </Link>
           </li>
+          <li className={styles.mobileOnly}>
+            <a
+              href="https://hub.efficiensee.io"
+              target="_blank"
+              rel="noreferrer"
+              className={styles.link}
+              onClick={() => setOpen(false)}
+            >
+              Customer sign in ↗
+            </a>
+          </li>
         </ul>
 
         <div className={styles.actions}>
