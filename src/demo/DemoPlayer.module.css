@@ -152,11 +152,11 @@
 
 .app {
   display: flex;
-  height: 520px;
+  height: 620px;
 }
 
 @media (max-width: 640px) {
-  .app { height: 560px; }
+  .app { height: 600px; }
 }
 
 /* V1 sidebar */
@@ -726,4 +726,311 @@
   .page, .modal, .modalBackdrop, .toast, .pill { animation: none; }
   .hot { animation: none; box-shadow: 0 0 0 3px rgba(245,168,0,0.7); }
   .cursor { transition: none; }
+}
+
+/* ── Multi-frame screens: toolbar, card panels, richer modals ── */
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.toolBtn {
+  display: inline-block;
+  padding: 8px 11px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  color: #4b5563;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.panels {
+  display: grid;
+  gap: 12px;
+}
+
+@media (max-width: 640px) {
+  .panels { grid-template-columns: minmax(0, 1fr) !important; }
+}
+
+.panel {
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  background: #f3f4f6;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.panelHead {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #374151;
+  background: #e5e7eb;
+}
+
+.panelHead.band_green,
+.panelHead.band_blue,
+.panelHead.band_amber,
+.panelHead.band_teal,
+.panelHead.band_purple { color: #fff; }
+
+.panelCount { font-size: 11.5px; font-weight: 500; opacity: 0.8; }
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px;
+}
+
+.empty {
+  padding: 18px 0;
+  text-align: center;
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.card {
+  background: #fff;
+  border: 2px solid #e5e7eb;
+  border-radius: 9px;
+  overflow: hidden;
+  transition: border-color 200ms, box-shadow 200ms;
+}
+
+.cardSelected { border-color: #22c55e; background: #f0fdf4; }
+.cardFocus { box-shadow: 0 0 0 3px rgba(245,168,0,0.35); }
+
+.cardBand {
+  padding: 4px 10px;
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.band_green { background: #16a34a; }
+.band_blue { background: #2563eb; }
+.band_amber { background: #f59e0b; }
+.band_teal { background: #0d9488; }
+.band_purple { background: #7c3aed; }
+.band_gray { background: #94a3b8; }
+.band_red { background: #dc2626; }
+
+.cardBody { padding: 9px 10px; }
+
+.cardTitleRow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.cardTitle {
+  font-size: 13px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.checkbox {
+  display: inline-grid;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  border-radius: 4px;
+  border: 2px solid #9ca3af;
+  background: #fff;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.checkboxOn { background: #16a34a; border-color: #16a34a; }
+
+.cardFields {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(84px, 1fr));
+  gap: 6px 10px;
+}
+
+.cardFields > div { display: flex; flex-direction: column; min-width: 0; }
+
+.cardLabel { font-size: 10.5px; color: #6b7280; }
+
+.cardValue {
+  font-size: 12px;
+  font-weight: 600;
+  color: #111827;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cardActions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+
+.tone_teal { background: #ccfbf1; color: #115e59; }
+.text_teal { color: #0f766e; }
+
+.modalWide { width: min(560px, 100%); }
+
+.modalSub {
+  margin: -8px 0 12px;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.modal {
+  max-height: calc(100% - 8px);
+  overflow-y: auto;
+}
+
+.fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.fields > * { grid-column: 1 / -1; }
+.fields > .half { grid-column: auto; }
+
+@media (max-width: 480px) {
+  .fields > .half { grid-column: 1 / -1; }
+}
+
+.fields { column-gap: 10px; }
+
+.req { color: #ef4444; }
+
+.fieldValue {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.placeholder { color: #9ca3af; }
+.caret { color: #9ca3af; font-size: 11px; }
+
+.fieldHeading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+  padding-top: 8px;
+  border-top: 1px solid #f3f4f6;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.fieldHeadingTag {
+  font-size: 10.5px;
+  font-weight: 600;
+  padding: 1px 7px;
+  border-radius: 5px;
+  background: #e5e7eb;
+  color: #4b5563;
+}
+
+.fieldNote {
+  padding: 8px 10px;
+  border-radius: 7px;
+  background: #eff6ff;
+  color: #1e40af;
+  font-size: 11.5px;
+  line-height: 1.45;
+}
+
+.checks {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 6px;
+}
+
+.checkItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #374151;
+}
+
+.summary {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  font-size: 12px;
+  color: #4b5563;
+}
+
+.summaryTitle { font-weight: 700; color: #111827; margin-bottom: 2px; }
+
+.summaryRow { display: flex; justify-content: space-between; gap: 10px; }
+.summaryRow strong { color: #111827; font-variant-numeric: tabular-nums; }
+
+.frameNote {
+  font-size: 13px;
+  font-weight: 600;
+  color: #cddcea;
+}
+
+.fieldHelp {
+  font-size: 10.5px;
+  font-weight: 400;
+  color: #6b7280;
+  line-height: 1.4;
+}
+
+/* Page scrolls; modal overlay and toast sit above it and stay put. */
+.pageWrap {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  display: flex;
+}
+
+.pageWrap > .page { flex: 1; }
+
+.modal {
+  max-height: calc(100% - 16px);
+  overflow-y: auto;
+  padding-bottom: 0;
+}
+
+.modalActions {
+  position: sticky;
+  bottom: 0;
+  margin: 14px -18px 0;
+  padding: 12px 18px;
+  background: #fff;
+  border-top: 1px solid #f3f4f6;
+}
+
+.panelHead { flex-wrap: wrap; }
+.panels[style*="repeat(4"] .cardFields { grid-template-columns: minmax(0, 1fr); }
+.panels[style*="repeat(4"] .panelHead { font-size: 12px; padding: 7px 9px; }
+
+/* Host for modals recreated from HarvestHub's markup (they position themselves inside it). */
+.realHost {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  animation: fade 200ms ease;
 }

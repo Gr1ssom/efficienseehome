@@ -6,6 +6,7 @@ import DemoPlayer from '../demo/DemoPlayer'
 import { sidebar, workflows } from '../demo/workflows'
 import type { DemoWorkflow } from '../demo/types'
 import { BOOKING_URL } from '../lib/signups'
+import { playMinutes } from '../demo/timing'
 import styles from './DemoPage.module.css'
 
 type Mode = 'watch' | 'guided'
@@ -73,7 +74,7 @@ export default function DemoPage() {
                     <span className={styles.pickTagline}>{w.tagline}</span>
                     <span className={styles.pickSummary}>{w.summary}</span>
                     <span className={styles.pickMeta}>
-                      {w.steps.length} steps · about {Math.round((w.steps.length * 9) / 60 * 2) / 2} min
+                      {w.steps.length} steps · about {playMinutes(w)} min
                     </span>
                   </span>
                   <span className={styles.pickCta}>{selected?.id === w.id ? 'Playing ↓' : 'Start →'}</span>
