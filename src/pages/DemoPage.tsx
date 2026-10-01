@@ -62,8 +62,8 @@ export default function DemoPage() {
               Walk a batch through <span className={ui.serif}>HarvestHub</span>.
             </h1>
             <p className={`${ui.lede} ${styles.desc}`}>
-              Pick a workflow. Watch it play, or click through it yourself. The forms are HarvestHub&rsquo;s own, filled
-              with demo data.
+              Choose a workflow to watch it play through, or step through it yourself. Every form shown is taken directly
+              from HarvestHub V1 and populated with sample data.
             </p>
 
             <div className={styles.picker}>
@@ -134,8 +134,8 @@ export default function DemoPage() {
                 />
               )}
               <p className={`${ui.mono} ${styles.disclaimer}`}>
-                Demo data only: cultivars, weights, people and tags are made up. Page layouts are simplified; the forms are
-                HarvestHub V1&rsquo;s own.
+                Sample data only: cultivars, weights, personnel and package tags are fictitious. Page layouts are
+                simplified; forms match HarvestHub V1.
               </p>
             </div>
           </section>
