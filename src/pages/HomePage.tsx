@@ -246,10 +246,11 @@ export default function HomePage() {
           <div className={`${ui.wrap} ${styles.floor}`}>
             <img src={facility} alt="The cultivation facility where HarvestHub is used" className={styles.floorImg} loading="lazy" />
             <div className={styles.floorCopy}>
-              <span className={ui.kicker}>Built on the floor</span>
+              <span className={ui.kicker}>Proven in production</span>
               <p className={styles.quote}>
-                HarvestHub was built inside a working cultivation and manufacturing facility, and it runs there every day.
-                The forms in the demo are the ones the crew <span className={ui.serif}>fills in every shift</span>.
+                HarvestHub was developed inside a licensed cultivation and manufacturing facility, where it remains in
+                <span className={ui.serif}> daily production use</span>. The demo reproduces its workflows and forms with
+                sample data.
               </p>
             </div>
           </div>
