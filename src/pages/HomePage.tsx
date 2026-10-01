@@ -22,8 +22,9 @@ import trimWeigh from '../assets/screens/trim-weigh.jpg'
 import testResults from '../assets/screens/test-results.jpg'
 import allocate from '../assets/screens/allocate.jpg'
 import facility from '../assets/Aug_22_2025_E.jpg'
+import myKpis from '../assets/screens/my-kpis.png'
 
-const capabilities = ['METRC sync (read-only)', 'LeafLink inventory', 'USB scale capture', 'Growlink & SensorPush sensors', 'PIN sign-in on shared terminals']
+const capabilities = ['METRC sync (read-only)', 'LeafLink inventory', 'USB scale capture', 'Growlink & SensorPush sensors', 'Employee KPIs on every badge']
 
 const stages = [
   { n: '01', name: 'Import', line: 'Start the batch from the METRC harvest: plant count and wet weight included.' },
@@ -57,6 +58,13 @@ const features = [
     img: allocate,
     alt: 'HarvestHub Allocation Station screen',
   },
+]
+
+const reports = [
+  { name: 'Production', line: 'Harvest breakdowns by cultivar, crop and room: wet to dry, AAA/A/B, trim and loss. Crop report cards against projected yield.' },
+  { name: 'Week over week', line: 'Executive production report: bucking and trim this week against last, month against month, and packaging by brand and SKU.' },
+  { name: 'Cost & sales', line: 'COGS by crop with labor by department. LeafLink sell-through, stock levels and inventory that has sat 45+ days.' },
+  { name: 'People', line: 'Trim lb/hr and bucking plants/hr rankings, packaging units per hour, task times, attendance points and trim bonus tiers.' },
 ]
 
 const departments: { icon: ComponentType<IconProps>; name: string; line: string }[] = [
@@ -157,8 +165,42 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* ── Departments ──────────────────────────────────── */}
+        {/* ── Reporting & people ───────────────────────────── */}
         <section className={`${styles.section} ${styles.band}`}>
+          <div className={`${ui.wrap} ${styles.reporting}`}>
+            <div>
+              <div className={styles.sectionHead}>
+                <span className={ui.kicker}>Reporting &amp; people</span>
+                <h2 className={ui.h2}>Numbers for the office. <span className={ui.serif}>Their own</span> numbers for the floor.</h2>
+                <p className={ui.body}>
+                  Every weight and timed session feeds the reports, so nobody builds a spreadsheet at the end of the week.
+                  Rates use working time: scheduled breaks and paused time don&rsquo;t count against anyone.
+                </p>
+              </div>
+              <dl className={styles.reports}>
+                {reports.map((r) => (
+                  <div key={r.name} className={styles.report}>
+                    <dt>{r.name}</dt>
+                    <dd>{r.line}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+            <figure className={styles.kpiFig}>
+              <img src={myKpis} alt="HarvestHub My KPIs: an employee's own trim, bucking, task and attendance numbers" className={styles.kpiImg} loading="lazy" />
+              <figcaption>
+                <strong>My KPIs.</strong> Employees scan the QR on their badge and enter their PIN to see their own trim
+                rate, bucking pace, task hours and attendance. No account needed, and it locks after two minutes.
+              </figcaption>
+              <Link to="/demo#kpis" className={ui.btnLink}>
+                Try it in the demo <ArrowRight size={16} className={ui.arrow} />
+              </Link>
+            </figure>
+          </div>
+        </section>
+
+        {/* ── Departments ──────────────────────────────────── */}
+        <section className={styles.section}>
           <div className={ui.wrap}>
             <div className={styles.sectionHead}>
               <span className={ui.kicker}>Coverage</span>

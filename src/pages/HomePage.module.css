@@ -317,3 +317,56 @@
   .heroActions,
   .ctaActions { width: 100%; flex-direction: column; }
 }
+
+/* ── Reporting & people ────────────────────────────────── */
+.reporting {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+  gap: clamp(40px, 6vw, 96px);
+  align-items: start;
+}
+
+.reports {
+  border-top: 1px solid var(--ink);
+}
+
+.report {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr);
+  gap: 16px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.report dt { font-weight: 600; }
+.report dd { font-size: 15px; line-height: 1.6; color: var(--ink-2); }
+
+.kpiFig {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 340px;
+  justify-self: center;
+}
+
+.kpiImg {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 24px 30px rgba(17, 26, 19, 0.22));
+}
+
+.kpiFig figcaption {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+
+.kpiFig figcaption strong { color: var(--ink); font-weight: 600; }
+
+@media (max-width: 900px) {
+  .reporting { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 520px) {
+  .report { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+}

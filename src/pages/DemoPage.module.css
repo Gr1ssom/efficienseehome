@@ -148,6 +148,65 @@
   margin-top: 8px;
 }
 
+/* ── Employee KPIs ──────────────────────────────────────── */
+.kpiSection {
+  scroll-margin-top: 64px;
+  padding: clamp(64px, 8vw, 104px) 0;
+  border-top: 1px solid var(--line);
+}
+
+.kpi {
+  display: grid;
+  grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+  gap: clamp(32px, 6vw, 96px);
+  align-items: center;
+}
+
+.kpiCopy {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.kpiPoints {
+  list-style: none;
+  border-top: 1px solid var(--line-strong);
+}
+
+.kpiPoints li {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line-strong);
+  font-size: 15px;
+  color: var(--ink-2);
+}
+
+.kpiPhone {
+  justify-self: center;
+  width: 100%;
+  max-width: 360px;
+  height: 720px;
+  border-radius: 44px;
+  border: 10px solid var(--ink);
+  background: var(--ink);
+  overflow: hidden;
+  box-shadow: 0 30px 60px -30px rgba(17, 26, 19, 0.45);
+}
+
+.kpiScreen {
+  height: 100%;
+  overflow-y: auto;
+  border-radius: 34px;
+  background: #f9fafb;
+  scrollbar-width: none;
+}
+
+.kpiScreen::-webkit-scrollbar { display: none; }
+
+@media (max-width: 860px) {
+  .kpi { grid-template-columns: minmax(0, 1fr); }
+  .kpiPhone { height: min(720px, 80svh); }
+}
+
 /* ── V2 ─────────────────────────────────────────────────── */
 .v2Section {
   padding: clamp(64px, 8vw, 104px) 0;
