@@ -1,4 +1,4 @@
-import { X } from 'lucide-react'
+import { X } from '@phosphor-icons/react'
 import HotButton from '../HotButton'
 
 /** HarvestHub: src/components/DryRooms.tsx — "Select Harvest Date" (Import from METRC). */

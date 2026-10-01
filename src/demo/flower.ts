@@ -1,6 +1,10 @@
 import type { Cell, DemoCard, DemoScreen, DemoWorkflow } from './types'
+import SelectHarvestsToImportModal from './hh/modals/SelectHarvestsToImportModal'
+import MetrcHarvestCreateModal from './hh/modals/MetrcHarvestCreateModal'
+import MissingMoistureReadingsModal from './hh/modals/MissingMoistureReadingsModal'
+import MoistureLogModal from './hh/modals/MoistureLogModal'
 import SelectHarvestDateModal from './hh/modals/SelectHarvestDateModal'
-import { BATCH, METRC_HARVEST, STRAIN, TAG_PKG, TAG_SRC, TAG_TEST, TEAM as TEAM_LIST } from './hh/demoData'
+import { BATCH, STRAIN, TAG_PKG, TAG_SRC, TAG_TEST, TEAM as TEAM_LIST } from './hh/demoData'
 
 /*
  * Flower walkthrough, click for click as HarvestHub V1 runs it today:
@@ -242,56 +246,12 @@ export const flower: DemoWorkflow = {
         },
         {
           screen: dryRooms([]),
-          modal: {
-            title: 'Select Harvests to Import',
-            subtitle: 'Found 2 harvests for 2026-09-22',
-            wide: true,
-            fields: [
-              {
-                label: METRC_HARVEST, kind: 'card', checked: true, tag: 'Product',
-                rows: [['Strains:', STRAIN], ['Plant Count:', '120'], ['Current Weight:', '139,400.00 Grams'], ['Started:', '09/22/2026']],
-              },
-              {
-                label: 'GC-0922-F4', kind: 'card', tag: 'Product',
-                rows: [['Strains:', 'Cereal Milk'], ['Plant Count:', '96'], ['Current Weight:', '101,870.00 Grams'], ['Started:', '09/22/2026']],
-              },
-              { label: '1 of 2 harvests selected', kind: 'note' },
-            ],
-            confirm: 'Continue with 1 Harvest',
-          },
+          modal: { real: SelectHarvestsToImportModal, confirm: 'Continue with 1 Harvest' },
           note: 'Select the METRC harvest',
         },
         {
           screen: dryRooms([]),
-          modal: {
-            title: 'Create Post-Harvest Batches from METRC',
-            subtitle: '1 METRC Harvest Selected',
-            wide: true,
-            fields: [
-              { label: 'Configure Cultivars & Verify Required Fields', kind: 'heading', value: '✓ All strains mapped' },
-              { label: `Batch 1: ${STRAIN}`, kind: 'heading', value: `from ${METRC_HARVEST}` },
-              { label: 'Crop', kind: 'select', required: true, value: 'Flower Bay 3 · Crop 0922' },
-              { label: 'Match to Strain', kind: 'select', required: true, value: STRAIN, half: true },
-              { label: 'Plant Count', required: true, value: '120', half: true },
-              { label: 'Wet Weight (grams)', required: true, value: '139400.00', half: true },
-              { label: 'Dry Room', kind: 'select', required: true, value: 'Dry Room 2', half: true },
-              {
-                label: 'Status Flags (Optional)', kind: 'checks',
-                checks: [
-                  { label: 'Ready for Bucking', checked: false },
-                  { label: '△ Triangle', checked: false },
-                  { label: '□ Square', checked: false },
-                  { label: 'Seeded', checked: false },
-                ],
-              },
-              {
-                label: 'Summary', kind: 'summary',
-                rows: [['METRC Harvests:', '1'], ['Batches to Create:', '1'], ['Total Plants:', '120'], ['Strains Mapped:', '1/1']],
-              },
-              { label: 'Note: Each METRC harvest creates exactly one batch (1:1 ratio).', kind: 'note' },
-            ],
-            confirm: 'Create 1 Batch',
-          },
+          modal: { real: MetrcHarvestCreateModal, confirm: 'Create 1 Batch' },
           note: 'Plant count and wet weight come straight from METRC',
         },
       ],
@@ -310,28 +270,12 @@ export const flower: DemoWorkflow = {
         },
         {
           screen: dryRooms([gcDrying('Final Checks (Days 8-10)', '9', 'Not logged')], { focusCard: [1, 0] }),
-          modal: {
-            title: 'Missing Moisture Readings',
-            fields: [
-              { label: `${BATCH} has no readings logged.`, kind: 'note' },
-              { label: 'Moisture % — not recorded', kind: 'heading' },
-              { label: 'Water Activity — not recorded', kind: 'heading' },
-            ],
-            confirm: 'Log Readings Now',
-          },
+          modal: { real: MissingMoistureReadingsModal, confirm: 'Log Readings Now' },
           note: 'Readings are required before bucking',
         },
         {
           screen: dryRooms([gcDrying('Final Checks (Days 8-10)', '9', 'Not logged')], { focusCard: [1, 0] }),
-          modal: {
-            title: `Moisture Report: ${STRAIN}`,
-            fields: [
-              { label: 'Water Activity', required: true, value: '0.62' },
-              { label: 'Moisture % (optional)', value: '11.8' },
-              { label: 'Notes (optional)', value: 'Stems snapping, ready to buck' },
-            ],
-            confirm: 'Save Entry',
-          },
+          modal: { real: MoistureLogModal, confirm: 'Save Entry' },
           note: 'Log water activity and moisture',
         },
         {
