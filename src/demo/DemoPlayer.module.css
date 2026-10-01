@@ -1107,3 +1107,102 @@
   .iconBtn { width: 44px; height: 44px; }
   .nextBtn { min-height: 44px; }
 }
+
+/* ── Site theme (light, editorial) for the player chrome around the mock window ── */
+.modeSwitch {
+  background: var(--card);
+  border-color: var(--line-strong);
+}
+
+.modeBtn { color: var(--muted); }
+.modeBtn:hover { color: var(--ink); }
+
+.modeActive {
+  background: var(--ink);
+  color: #fff;
+}
+
+.iconBtn {
+  background: var(--card);
+  border-color: var(--line-strong);
+  color: var(--ink);
+}
+
+.iconBtn:hover:not(:disabled) { background: var(--paper-2); }
+
+.counter { color: var(--muted); font-family: var(--font-mono); }
+
+.progress { background: var(--line); height: 3px; }
+.progressFill { background: var(--green); }
+
+.window {
+  border-color: var(--line-strong);
+  box-shadow: 0 1px 0 rgba(17, 26, 19, 0.04), 0 30px 60px -30px rgba(17, 26, 19, 0.35);
+}
+
+.narrTop,
+.narrRest {
+  background: var(--card);
+  border-color: var(--line-strong);
+}
+
+.stepNum {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  text-transform: none;
+  color: var(--green-ink);
+}
+
+.stepHeading {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+
+.stepBody { color: var(--ink-2); }
+
+.frameNote { color: var(--ink); font-weight: 500; }
+
+.metrc {
+  background: var(--paper);
+  border-color: var(--line-strong);
+  color: var(--ink-2);
+}
+
+.metrcTag {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  background: var(--ink);
+  color: #fff;
+}
+
+.hint { color: var(--green-ink); }
+.hint strong { color: var(--ink); }
+
+.nextBtn {
+  background: var(--ink);
+  color: #fff;
+  font-weight: 500;
+  border-radius: 8px;
+}
+
+.rail { border-top-color: var(--line); }
+
+.railItem,
+.railDone { color: var(--muted); }
+
+.railItem:hover,
+.railDone:hover { background: var(--paper); color: var(--ink); }
+
+.railActive {
+  background: var(--green-wash);
+  color: var(--ink);
+}
+
+.railDot { border-color: var(--line-strong); }
+.railActive .railDot { background: var(--green); border-color: var(--green); color: #fff; }
+.railDone .railDot { color: var(--green); border-color: var(--green-wash); background: var(--green-wash); }

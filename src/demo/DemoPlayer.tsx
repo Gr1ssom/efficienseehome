@@ -410,10 +410,10 @@ export default function DemoPlayer({ workflow, sidebar, mode, onModeChange, onFi
       <div className={styles.controls} data-player-top>
         <div className={styles.modeSwitch} role="tablist" aria-label="Demo mode">
           <button role="tab" aria-selected={mode === 'watch'} className={mode === 'watch' ? styles.modeActive : styles.modeBtn} onClick={() => changeMode('watch')}>
-            ▶ Watch
+            Watch
           </button>
           <button role="tab" aria-selected={mode === 'guided'} className={mode === 'guided' ? styles.modeActive : styles.modeBtn} onClick={() => changeMode('guided')}>
-            ☝ Click through
+            Click through
           </button>
         </div>
         <div className={styles.transport}>

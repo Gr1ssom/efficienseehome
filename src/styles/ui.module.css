@@ -1,0 +1,147 @@
+/* Shared building blocks for the marketing pages (light, editorial). */
+
+.wrap {
+  width: 100%;
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+}
+
+.kicker::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 1px;
+  background: var(--green);
+}
+
+.h1 {
+  font-size: clamp(40px, 6.2vw, 76px);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.h2 {
+  font-size: clamp(30px, 3.8vw, 46px);
+  line-height: 1.06;
+  letter-spacing: -0.03em;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.h3 {
+  font-size: 19px;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* Serif accent — use for one or two words, never whole headings */
+.serif {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.lede {
+  font-size: clamp(17px, 1.5vw, 19px);
+  line-height: 1.6;
+  color: var(--ink-2);
+  max-width: 560px;
+}
+
+.body {
+  font-size: 15.5px;
+  line-height: 1.65;
+  color: var(--ink-2);
+}
+
+.muted { color: var(--muted); }
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.01em;
+}
+
+/* Buttons */
+.btn,
+.btnGhost,
+.btnLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 46px;
+  padding: 0 20px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  white-space: nowrap;
+  border: 1px solid transparent;
+  transition: background 150ms, border-color 150ms, color 150ms;
+}
+
+.btn {
+  background: var(--ink);
+  color: #fff;
+}
+
+.btn:hover { background: #26322a; }
+
+.btnGhost {
+  background: transparent;
+  border-color: var(--line-strong);
+  color: var(--ink);
+}
+
+.btnGhost:hover { border-color: var(--ink); }
+
+.btnLink {
+  padding: 0;
+  min-height: 0;
+  color: var(--green-ink);
+  font-weight: 500;
+}
+
+.btnLink:hover { color: var(--ink); }
+
+.arrow { transition: transform 150ms; }
+.btn:hover .arrow,
+.btnGhost:hover .arrow,
+.btnLink:hover .arrow { transform: translateX(3px); }
+
+/* Screens (product screenshots) */
+.screen {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  border: 1px solid var(--line-strong);
+  background: var(--card);
+  box-shadow: 0 1px 0 rgba(17, 26, 19, 0.04), 0 24px 48px -24px rgba(17, 26, 19, 0.25);
+}
+
+.rule {
+  height: 1px;
+  background: var(--line);
+  border: 0;
+}
+
+@media (max-width: 640px) {
+  .btn, .btnGhost { width: 100%; }
+}
