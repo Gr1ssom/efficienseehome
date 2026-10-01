@@ -145,3 +145,21 @@
 @media (max-width: 640px) {
   .btn, .btnGhost { width: 100%; }
 }
+
+/* Phone frame for mobile screens (My KPIs) */
+.phone {
+  width: 100%;
+  max-width: 340px;
+  border-radius: 40px;
+  border: 10px solid var(--ink);
+  background: var(--ink);
+  overflow: hidden;
+  box-shadow: 0 30px 60px -30px rgba(17, 26, 19, 0.45);
+}
+
+.phone img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 30px;
+}

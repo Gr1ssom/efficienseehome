@@ -4,6 +4,7 @@ import { ArrowRight } from '@phosphor-icons/react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import DemoPlayer from '../demo/DemoPlayer'
+import MyKpisScreen from '../demo/hh/screens/MyKpisScreen'
 import { sidebar, workflows } from '../demo/workflows'
 import type { DemoWorkflow } from '../demo/types'
 import { BOOKING_URL } from '../lib/signups'
@@ -31,7 +32,10 @@ export default function DemoPage() {
   const other = workflows.find((w) => w.id !== selected?.id)!
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'instant' })
+    // Land on the section a link asked for (e.g. /demo#kpis), otherwise at the top.
+    const target = window.location.hash ? document.getElementById(window.location.hash.slice(1)) : null
+    if (target) target.scrollIntoView({ behavior: 'instant', block: 'start' })
+    else window.scrollTo({ top: 0, behavior: 'instant' })
   }, [])
 
   const choose = (w: DemoWorkflow, m: Mode = mode) => {
@@ -136,6 +140,31 @@ export default function DemoPage() {
             </div>
           </section>
         )}
+
+        {/* ── Employee KPIs (live recreation of My KPIs) ────── */}
+        <section id="kpis" className={styles.kpiSection}>
+          <div className={`${ui.wrap} ${styles.kpi}`}>
+            <div className={styles.kpiCopy}>
+              <span className={ui.kicker}>Employee KPIs · My KPIs</span>
+              <h2 className={ui.h2}>Everyone sees <span className={ui.serif}>their own</span> numbers.</h2>
+              <p className={ui.body}>
+                Each employee scans the QR code on their badge and enters their PIN. They see their own trim rate, bucking
+                pace, task hours and attendance standing for the last 7 days, 30 days or this month. No account, no sign-in,
+                and the page locks itself after two minutes.
+              </p>
+              <ul className={styles.kpiPoints}>
+                <li>Rates use working time: scheduled breaks and paused time don&rsquo;t count against anyone.</li>
+                <li>Managers print QR badges from the Personnel Portal, one at a time or as a full sheet.</li>
+                <li>Managers see the rankings; employees see only their own page.</li>
+              </ul>
+            </div>
+            <div className={styles.kpiPhone} aria-label="HarvestHub My KPIs screen with demo data">
+              <div className={`hh-app ${styles.kpiScreen}`}>
+                <MyKpisScreen />
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* ── V2 coming soon ────────────────────────────────── */}
         <section id="v2" className={styles.v2Section}>
