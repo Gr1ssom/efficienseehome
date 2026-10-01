@@ -152,11 +152,11 @@
 
 .app {
   display: flex;
-  height: 520px;
+  height: 620px;
 }
 
 @media (max-width: 640px) {
-  .app { height: 560px; }
+  .app { height: 600px; }
 }
 
 /* V1 sidebar */
