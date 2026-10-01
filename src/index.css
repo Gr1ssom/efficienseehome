@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap');
 
 *, *::before, *::after {
   box-sizing: border-box;
@@ -7,41 +7,43 @@
 }
 
 :root {
-  --primary-50:  #eff6ff;
-  --primary-100: #dbeafe;
-  --primary-200: #bfdbfe;
-  --primary-300: #93c5fd;
-  --primary-400: #60a5fa;
-  --primary-500: #3b82f6;
-  --primary-600: #2563eb;
-  --primary-700: #1d4ed8;
-  --primary-800: #1e40af;
-  --primary-900: #1e3a8a;
+  /* Surfaces */
+  --paper: #f7f6f1;        /* page */
+  --paper-2: #efeee7;      /* quiet bands */
+  --card: #ffffff;
+  --ink: #111a13;          /* text, primary buttons */
+  --ink-2: #3c463e;        /* body text */
+  --muted: #6b746c;        /* secondary text */
+  --line: #e3e2da;         /* hairlines */
+  --line-strong: #cfcec4;
 
-  --secondary-50:  #f0fdf4;
-  --secondary-500: #22c55e;
-  --secondary-600: #16a34a;
+  /* Brand (HarvestHub) */
+  --green: #2e7d1a;
+  --green-ink: #1f5a12;
+  --green-wash: #e9f1e4;
+  --gold: #f5a800;
 
-  --accent-500: #f97316;
-  --accent-600: #ea580c;
-
-  --success-500: #22c55e;
-  --warning-500: #f59e0b;
-  --error-500:   #ef4444;
-
+  /* Kept for the demo player and older components */
   --neutral-50:  #f9fafb;
-  --neutral-100: #f3f4f6;
   --neutral-200: #e5e7eb;
-  --neutral-300: #d1d5db;
   --neutral-400: #9ca3af;
   --neutral-500: #6b7280;
   --neutral-600: #4b5563;
   --neutral-700: #374151;
   --neutral-800: #1f2937;
-  --neutral-900: #111827;
 
-  --font-sans: 'Inter', system-ui, sans-serif;
-  --font-display: 'DM Sans', system-ui, sans-serif;
+  --font-sans: 'Geist', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Geist', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-serif: 'Instrument Serif', ui-serif, Georgia, serif;
+  --font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --radius: 10px;
+  --wrap: 1160px;
+  --gutter: 24px;
+}
+
+@media (max-width: 640px) {
+  :root { --gutter: 16px; }
 }
 
 html { scroll-behavior: smooth; }
@@ -49,12 +51,13 @@ html { scroll-behavior: smooth; }
 body {
   font-family: var(--font-sans);
   font-size: 16px;
-  line-height: 1.5;
-  color: var(--neutral-800);
-  background: #080f18;
+  line-height: 1.55;
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
-  -webkit-font-smoothing: antialiased;
+  font-feature-settings: 'ss01', 'cv11';
 }
 
 #root {
@@ -66,3 +69,11 @@ body {
 a { color: inherit; text-decoration: none; }
 img { max-width: 100%; display: block; }
 button { font-family: inherit; cursor: pointer; }
+
+::selection { background: var(--green-wash); color: var(--green-ink); }
+
+:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
+  border-radius: 4px;
+}

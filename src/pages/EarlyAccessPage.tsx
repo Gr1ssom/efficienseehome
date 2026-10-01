@@ -1,5 +1,6 @@
 import { useEffect, useState, type FormEvent } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
+import { CalendarBlank } from '@phosphor-icons/react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { BOOKING_URL, submitSignup } from '../lib/signups'
@@ -63,23 +64,22 @@ export default function EarlyAccessPage() {
     <>
       <Navbar />
       <main className={styles.main}>
-        <div className={styles.glow} aria-hidden />
         <div className={styles.inner}>
           <div className={styles.copy}>
-            <span className={styles.pill}>HarvestHub V2 · Coming soon</span>
-            <h1 className={styles.title}>Get early access</h1>
+            <span className={styles.pill}>HarvestHub V2 · coming soon</span>
+            <h1 className={styles.title}>Get <span className={styles.serif}>early</span> access</h1>
             <p className={styles.desc}>
               Leave your details and we’ll reach out when HarvestHub V2 is ready, with early access and an
               informational meeting for your team. Want to talk sooner? Grab a time on the calendar.
             </p>
             <a href={BOOKING_URL} target="_blank" rel="noreferrer" className={styles.bookBtn}>
-              📅 Schedule a meeting now
+              <CalendarBlank size={18} /> Schedule a meeting now
             </a>
             <ul className={styles.points}>
               <li>No commitment: this just puts you on the list</li>
               <li>We only use your details to contact you about HarvestHub</li>
               <li>
-                Curious what it looks like? <Link to="/demo">Watch the interactive demo →</Link>
+                Curious what it looks like? <Link to="/demo">Watch the interactive demo</Link>
               </li>
             </ul>
           </div>
@@ -93,7 +93,7 @@ export default function EarlyAccessPage() {
                   We’ll be in touch as HarvestHub V2 gets closer. If you’d like to meet now, pick a time that works for you.
                 </p>
                 <a href={BOOKING_URL} target="_blank" rel="noreferrer" className={styles.submit}>
-                  📅 Schedule a meeting now
+                  <CalendarBlank size={18} /> Schedule a meeting now
                 </a>
                 <Link to="/demo" className={styles.secondary}>Watch the demo while you wait</Link>
               </div>

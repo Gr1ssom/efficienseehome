@@ -1,68 +1,50 @@
 import { Link } from 'react-router-dom'
-import { products } from '../data/products'
+import mark from '../assets/mark.png'
+import { BOOKING_URL } from '../lib/signups'
 import styles from './Footer.module.css'
-import EfficienseeLogo from './EfficienseeLogo'
 
 export default function Footer() {
   return (
     <footer className={styles.footer}>
       <div className={styles.inner}>
         <div className={styles.brand}>
-          <div className={styles.logo}>
-            <EfficienseeLogo size={48} />
-            <div className={styles.logoTextWrap}>
-              <span className={styles.logoText}>Efficiensee</span>
-              <span className={styles.logoSub}>LLC</span>
-            </div>
-          </div>
+          <Link to="/" className={styles.logo}>
+            <img src={mark} alt="" className={styles.mark} />
+            <span>Efficiensee</span>
+          </Link>
           <p className={styles.tagline}>
-            Purpose-built software for the cannabis industry — from seed to shelf.
+            HarvestHub is facility software for licensed cannabis cultivation and manufacturing.
           </p>
         </div>
 
-        <div className={styles.col}>
-          <h4 className={styles.colTitle}>Products</h4>
-          <ul className={styles.colList}>
-            {products.map((p) => (
-              <li key={p.id}>
-                <Link to={p.path} className={styles.colLink}>{p.name}</Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className={styles.col}>
-          <h4 className={styles.colTitle}>Launch</h4>
-          <ul className={styles.colList}>
-            {products.map((p) => (
-              <li key={p.id}>
-                <Link to={p.demoPath} className={styles.colLink}>
-                  {p.name} demo &rarr;
-                </Link>
-              </li>
-            ))}
-            {products.map((p) => (
-              <li key={`${p.id}-signin`}>
-                <a href={p.url} target="_blank" rel="noreferrer" className={styles.colLink}>
-                  Customer sign in
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className={styles.col}>
-          <h4 className={styles.colTitle}>Company</h4>
-          <ul className={styles.colList}>
-            <li><Link to="/" className={styles.colLink}>Home</Link></li>
-            <li><Link to="/early-access" className={styles.colLink}>Early access</Link></li>
-            <li><a href="mailto:hello@efficiensee.io" className={styles.colLink}>Contact</a></li>
-          </ul>
-        </div>
+        <nav className={styles.cols} aria-label="Footer">
+          <div>
+            <h4 className={styles.colTitle}>Product</h4>
+            <ul className={styles.colList}>
+              <li><Link to="/products/hub" className={styles.colLink}>HarvestHub</Link></li>
+              <li><Link to="/demo" className={styles.colLink}>Interactive demo</Link></li>
+              <li><Link to="/early-access" className={styles.colLink}>HarvestHub V2</Link></li>
+            </ul>
+          </div>
+          <div>
+            <h4 className={styles.colTitle}>Talk to us</h4>
+            <ul className={styles.colList}>
+              <li><Link to="/early-access" className={styles.colLink}>Get early access</Link></li>
+              <li><a href={BOOKING_URL} target="_blank" rel="noreferrer" className={styles.colLink}>Book a meeting</a></li>
+              <li><a href="mailto:hello@efficiensee.io" className={styles.colLink}>hello@efficiensee.io</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 className={styles.colTitle}>Customers</h4>
+            <ul className={styles.colList}>
+              <li><a href="https://hub.efficiensee.io" target="_blank" rel="noreferrer" className={styles.colLink}>Sign in ↗</a></li>
+            </ul>
+          </div>
+        </nav>
       </div>
 
       <div className={styles.bottom}>
-        <p>&copy; {new Date().getFullYear()} Efficiensee, LLC. All rights reserved.</p>
+        <span>© {new Date().getFullYear()} Efficiensee, LLC</span>
       </div>
     </footer>
   )
