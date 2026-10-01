@@ -52,11 +52,11 @@ export default function HomePage() {
               </p>
 
               <div className={styles.heroActions}>
-                <a href="https://hub.efficiensee.io" target="_blank" rel="noreferrer" className={styles.btnPrimary}>
+                <Link to="/demo" className={styles.btnPrimary}>
                   Explore HarvestHub
-                </a>
-                <Link to="/products/hub" className={styles.btnSecondary}>
-                  See the full platform
+                </Link>
+                <Link to="/early-access" className={styles.btnSecondary}>
+                  Get early access
                 </Link>
               </div>
 
@@ -192,15 +192,13 @@ export default function HomePage() {
                     </ul>
 
                     <div className={styles.productCardActions}>
-                      <a
-                        href={p.url}
-                        target="_blank"
-                        rel="noreferrer"
+                      <Link
+                        to={p.demoPath}
                         className={styles.productCardLaunch}
                         style={{ background: p.accentGradient }}
                       >
                         Open {p.shortName} →
-                      </a>
+                      </Link>
                       <Link to={p.path} className={styles.productCardLearn}>
                         Full Overview
                       </Link>
@@ -251,9 +249,9 @@ export default function HomePage() {
                 We understand the regulatory complexity, operational pressure, and competitive
                 demands of the cannabis industry — because our products were built inside it.
               </p>
-              <a href="https://hub.efficiensee.io" target="_blank" rel="noreferrer" className={styles.btnPrimary}>
-                Start for free
-              </a>
+              <Link to="/demo" className={styles.btnPrimary}>
+                Try the interactive demo
+              </Link>
             </div>
             <div className={styles.whyRight}>
               {[
@@ -305,10 +303,15 @@ export default function HomePage() {
               </p>
             </div>
             <div className={styles.ctaActions}>
-              <a href="https://hub.efficiensee.io" target="_blank" rel="noreferrer" className={styles.ctaBtnHub}>
+              <Link to="/demo" className={styles.ctaBtnHub}>
                 Start with HarvestHub →
-              </a>
-              <p className={styles.ctaNote}>No credit card required</p>
+              </Link>
+              <Link to="/early-access" className={styles.ctaBtnEarly}>
+                Get early access &amp; book a meeting
+              </Link>
+              <p className={styles.ctaNote}>
+                Interactive demo · no sign-up · <Link to="/early-access" className={styles.ctaNoteV2}>V2 coming soon</Link>
+              </p>
             </div>
           </div>
         </section>

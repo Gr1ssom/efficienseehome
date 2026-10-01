@@ -103,6 +103,34 @@
   box-shadow: 0 4px 16px rgba(45,122,34,0.4);
 }
 
+.earlyBtn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #1a2535;
+  background: #e8b84b;
+  white-space: nowrap;
+  transition: opacity 150ms ease, transform 150ms ease;
+}
+
+.earlyBtn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.signIn {
+  font-size: 14px;
+  font-weight: 500;
+  color: #8fa4ba;
+  white-space: nowrap;
+  transition: color 150ms ease;
+}
+
+.signIn:hover {
+  color: #fff;
+}
+
 .burger {
   display: none;
   flex-direction: column;
@@ -175,7 +203,8 @@
     display: flex;
   }
 
-  .ctaBtn {
+  .ctaBtn,
+  .signIn {
     display: none;
   }
 }

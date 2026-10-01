@@ -36,8 +36,15 @@ export default function Footer() {
           <ul className={styles.colList}>
             {products.map((p) => (
               <li key={p.id}>
+                <Link to={p.demoPath} className={styles.colLink}>
+                  {p.name} demo &rarr;
+                </Link>
+              </li>
+            ))}
+            {products.map((p) => (
+              <li key={`${p.id}-signin`}>
                 <a href={p.url} target="_blank" rel="noreferrer" className={styles.colLink}>
-                  Open {p.name.replace('Efficiensee ', '')} &rarr;
+                  Customer sign in
                 </a>
               </li>
             ))}
@@ -48,6 +55,7 @@ export default function Footer() {
           <h4 className={styles.colTitle}>Company</h4>
           <ul className={styles.colList}>
             <li><Link to="/" className={styles.colLink}>Home</Link></li>
+            <li><Link to="/early-access" className={styles.colLink}>Early access</Link></li>
             <li><a href="mailto:hello@efficiensee.io" className={styles.colLink}>Contact</a></li>
           </ul>
         </div>

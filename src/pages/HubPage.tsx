@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { products } from '../data/products'
@@ -46,14 +47,9 @@ export default function HubPage() {
               <p className={styles.heroTagline}>{hub.tagline}</p>
               <p className={styles.heroDesc}>{hub.description}</p>
               <div className={styles.heroCtas}>
-                <a
-                  href={hub.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className={styles.ctaLaunch}
-                >
+                <Link to={hub.demoPath} className={styles.ctaLaunch}>
                   Open HarvestHub →
-                </a>
+                </Link>
                 <a href="#modules" className={styles.ctaGhost}>
                   Explore Modules
                 </a>
@@ -305,9 +301,9 @@ export default function HubPage() {
             <p className={styles.ctaSub}>
               HarvestHub is purpose-built for cannabis cultivation facilities that demand compliance, coordination, and real-time visibility.
             </p>
-            <a href={hub.url} target="_blank" rel="noreferrer" className={styles.ctaBtn}>
+            <Link to={hub.demoPath} className={styles.ctaBtn}>
               Open HarvestHub →
-            </a>
+            </Link>
           </div>
         </section>
 

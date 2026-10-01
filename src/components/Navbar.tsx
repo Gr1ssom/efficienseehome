@@ -36,6 +36,15 @@ export default function Navbar() {
               </Link>
             </li>
           ))}
+          <li>
+            <Link
+              to="/demo"
+              className={`${styles.link} ${pathname === '/demo' ? styles.active : ''}`}
+              onClick={() => setOpen(false)}
+            >
+              Demo
+            </Link>
+          </li>
         </ul>
 
         <div className={styles.actions}>
@@ -43,10 +52,16 @@ export default function Navbar() {
             href="https://hub.efficiensee.io"
             target="_blank"
             rel="noreferrer"
-            className={styles.ctaBtn}
+            className={styles.signIn}
           >
-            Get Started
+            Sign in
           </a>
+          <Link to="/demo" className={styles.ctaBtn} onClick={() => setOpen(false)}>
+            Get Started
+          </Link>
+          <Link to="/early-access" className={styles.earlyBtn} onClick={() => setOpen(false)}>
+            Early access
+          </Link>
           <button
             className={styles.burger}
             aria-label="Toggle menu"
