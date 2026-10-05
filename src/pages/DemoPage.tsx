@@ -19,7 +19,7 @@ const SIGN_IN_URL = 'https://hub.efficiensee.io'
 const v2Points = [
   { title: 'Rebuilt from the ground up', body: 'A faster, modern app designed around the way facilities actually move product.' },
   { title: 'Audit trail on every change', body: 'Each weight, stage move, QC decision and shipment is written to an append-only history.' },
-  { title: 'Built for more than one facility', body: 'Organization-level setup, with each team’s data kept separate.' },
+  { title: 'Built for more than one facility', body: 'Organization-level setup with each team’s own LeafLink connection.' },
 ]
 
 export default function DemoPage() {

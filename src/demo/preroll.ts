@@ -265,7 +265,7 @@ export const preroll: DemoWorkflow = {
       id: 'pr-allocation',
       label: 'PR Allocation',
       heading: 'Build a batch and allocate it to SKUs',
-      body: 'PR Allocation holds every gram designated for pre-roll. Create Batch picks the material (the batch name fills in from the cultivar or a saved blend), then allocates the grams to SKUs with current stock beside each pack size, so the line restocks what is out.',
+      body: 'PR Allocation holds every gram designated for pre-roll. Create Batch picks the material (the batch name fills in from the cultivar or a saved blend), then allocates the grams to SKUs with live LeafLink stock beside each pack size, so the line restocks what is out.',
       frames: [
         {
           screen: prAllocation(true, { focusRow: 0, action: 'Create Batch', actionOn: 'header' }),
@@ -279,7 +279,7 @@ export const preroll: DemoWorkflow = {
         {
           screen: prAllocation(true),
           modal: { real: CreatePreRollBatchAllocateModal, confirm: 'Create Batch' },
-          note: 'All 8,060 g to Packs 5pk, out of stock',
+          note: 'All 8,060 g to Packs 5pk, out of stock on LeafLink',
         },
       ],
       after: prAllocation(false),
