@@ -89,7 +89,7 @@ export const products: Product[] = [
     integrations: [
       { name: 'METRC', description: 'State-mandated track-and-trace — harvest sync, plant counts, test results, destruction tasks, and package barcode verification.' },
       { name: 'Growlink', description: 'Real-time hardware controller, module, and sensor readings with 60-second polling, historical charts, and out-of-range alerts.' },
-      { name: 'LeafLink', description: 'B2B wholesale inventory sync with 30-minute background cache, order queue, product image caching, and price management.' },
+      { name: 'LeafLink', description: 'Read-only B2B wholesale orders and inventory with a 30-minute background cache, order queue, and product image caching.' },
       { name: 'SensorPush', description: 'Environmental monitoring — real-time temperature, humidity, and CO₂ with gateway status, alert thresholds, and historical trends.' },
       { name: 'Scale Hardware', description: 'Direct USB Web Serial connection to industrial scales (Ohaus Ranger) — real-time polling, stability detection, and tare management.' },
     ],
