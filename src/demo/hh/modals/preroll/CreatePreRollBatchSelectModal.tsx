@@ -13,8 +13,8 @@ const getProductLineColors = (productLine: string): { bg: string; text: string }
   return colors[productLine] || { bg: '#e5e7eb', text: '#1f2937' }
 }
 
-/* LeafLink units available for the selected cultivar, per product line (collapsed summary). */
-const LEAFLINK_TOTALS = [
+/* Sales units available for the selected cultivar, per product line (collapsed summary). */
+const STOCK_TOTALS = [
   { name: 'Packs', total: 412 },
   { name: 'Robust', total: 96 },
   { name: 'Reserve', total: 38 },
@@ -77,17 +77,17 @@ export default function CreatePreRollBatchSelectModal() {
         {/* Body */}
         <div className="flex-1 overflow-y-auto px-5 py-4">
 
-          {/* LeafLink Inventory Needs */}
+          {/* Inventory Needs */}
           <div className="mb-5 border border-slate-200 rounded-xl overflow-hidden bg-white">
             <button className="w-full flex items-center justify-between px-4 py-3 hover:bg-slate-50 transition-colors">
               <div className="flex items-center gap-2.5">
                 <ShoppingCart className="w-5 h-5 text-slate-500" />
-                <span className="font-semibold text-sm text-slate-800">LeafLink Inventory</span>
+                <span className="font-semibold text-sm text-slate-800">Sales Inventory</span>
                 <span className="px-2 py-0.5 text-xs font-bold rounded-full bg-red-100 text-red-700">3 low</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="flex items-center gap-3 text-xs text-slate-500">
-                  {LEAFLINK_TOTALS.map((pl) => (
+                  {STOCK_TOTALS.map((pl) => (
                     <span key={pl.name} className="flex items-center gap-1">
                       <span className="w-2 h-2 rounded-full" style={{ backgroundColor: getProductLineColors(pl.name).bg }} />
                       <span className={`font-bold ${pl.total === 0 ? 'text-red-600' : pl.total < lowStockThreshold ? 'text-amber-600' : 'text-slate-700'}`}>

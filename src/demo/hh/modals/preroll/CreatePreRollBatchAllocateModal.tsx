@@ -20,15 +20,15 @@ const getProductLineColors = (productLine: string): { bg: string; text: string }
   return colors[productLine] || { bg: '#e5e7eb', text: '#1f2937' }
 }
 
-/* LeafLink units available for this cultivar, per SKU. */
-const LEAFLINK: Record<string, number> = {
+/* Sales units available for this cultivar, per SKU. */
+const STOCK: Record<string, number> = {
   'Packs 2pk': 140, 'Packs 5pk': 0, 'Packs 10pk': 272,
   'Robust 2pk': 96, 'Robust 5pk': 0,
   'Reserve 1pk': 38, 'Reserve 2pk': 0, 'Reserve 5pk': 0,
   'Alpha 2pk': 0, 'Alpha 5pk': 0, 'Alpha 10pk': 0,
 }
 
-/* The operator allocates the whole lot to Packs 5pk, the SKU that is out on LeafLink. */
+/* The operator allocates the whole lot to Packs 5pk, the SKU that is out of stock. */
 const ALLOCATIONS: Record<string, number> = { 'Packs 5pk': PR_ROUTED_G }
 
 const getAllocationValue = (productLine: string, packSize: string) => ALLOCATIONS[`${productLine} ${packSize}`] || 0
@@ -143,7 +143,7 @@ export default function CreatePreRollBatchAllocateModal() {
                   <div className="p-3 bg-white">
                     <div className={`grid gap-3 ${productLine.packSizes.length <= 2 ? 'grid-cols-2' : 'grid-cols-3'}`}>
                       {productLine.packSizes.map((packSize) => {
-                        const avail = LEAFLINK[`${productLine.name} ${packSize}`]
+                        const avail = STOCK[`${productLine.name} ${packSize}`]
                         const value = getAllocationValue(productLine.name, packSize)
                         return (
                           <div key={packSize}>

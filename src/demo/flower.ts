@@ -203,7 +203,7 @@ const allocation = (cards: DemoCard[], extra: Partial<DemoScreen> = {}): DemoScr
   item: 'Allocation Station',
   title: 'Allocation Station',
   subtitle: 'Allocate tested batches to packaging queues',
-  toolbar: ['Strategy', 'Analytics', 'Sync LeafLink'],
+  toolbar: ['Strategy', 'Analytics', 'Sync Inventory'],
   kpis: [
     { label: 'Batches ready', value: String(cards.length + 2), tone: 'green' },
     { label: 'Total lbs', value: '41.6' },
@@ -563,7 +563,7 @@ export const flower: DemoWorkflow = {
       id: 'allocation',
       label: 'Allocation Station',
       heading: 'Allocate into products',
-      body: 'Tested flower is split across product lines by grade, in units or grams, with live LeafLink inventory and the Trim QC photos beside it. The allocation drops straight into the packaging and label queues.',
+      body: 'Tested flower is split across product lines by grade, in units or grams, with current sales inventory and the Trim QC photos beside it. The allocation drops straight into the packaging and label queues.',
       frames: [
         {
           screen: allocation([{
