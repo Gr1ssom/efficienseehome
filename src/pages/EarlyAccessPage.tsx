@@ -155,7 +155,7 @@ export default function EarlyAccessPage() {
                 {status === 'error' && (
                   <p className={styles.error} role="alert">
                     Something went wrong sending that. Please try again, or email{' '}
-                    <a href="mailto:hello@efficiensee.io">hello@efficiensee.io</a>.
+                    <a href="mailto:dylan@efficiensee.io">dylan@efficiensee.io</a>.
                   </p>
                 )}
 
