@@ -31,7 +31,7 @@ export default function Footer() {
             <ul className={styles.colList}>
               <li><Link to="/early-access" className={styles.colLink}>Get early access</Link></li>
               <li><a href={BOOKING_URL} target="_blank" rel="noreferrer" className={styles.colLink}>Book a meeting</a></li>
-              <li><a href="mailto:hello@efficiensee.io" className={styles.colLink}>hello@efficiensee.io</a></li>
+              <li><a href="mailto:dylan@efficiensee.io" className={styles.colLink}>dylan@efficiensee.io</a></li>
             </ul>
           </div>
           <div>
