@@ -19,7 +19,7 @@ export const sidebar: SidebarSection[] = [
   },
   { name: 'Pre-Roll', items: ['Dashboard', 'PR Allocation', 'PR Queue', 'S/F/P Queue', 'Labeling'] },
   { name: 'Testing Center', items: ['Testing Stats', 'Testing Hub'] },
-  { name: 'Fulfillment', items: ['Fulfillment Hub', 'Order Queue'] },
+  { name: 'Fulfillment', items: ['Fulfillment Hub', 'LeafLink Queue'] },
 ]
 
 export const workflows: DemoWorkflow[] = [flower, preroll]

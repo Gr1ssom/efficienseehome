@@ -34,7 +34,7 @@ const reports = [
   { name: 'Post-harvest throughput', line: 'Bucking, trim, packaging, pre-roll, flower and hash lab, plus water activity' },
   { name: 'Executive production', line: 'This week against last, month against month, packaging by brand and SKU' },
   { name: 'COGS by crop', line: 'Labor by department, financial summary, inventory and sales' },
-  { name: 'Sales', line: 'Sell-through, stock levels and inventory older than 45 days' },
+  { name: 'Sales', line: 'LeafLink sell-through, stock levels and inventory older than 45 days' },
   { name: 'Cultivation', line: 'IPM, cultivar health and new genetics' },
   { name: 'Testing', line: 'Batches, pounds and units sent to the lab' },
   { name: 'People', line: 'Trim and bucking rankings, packaging units per hour, task KPIs, attendance points, incentive pool' },
