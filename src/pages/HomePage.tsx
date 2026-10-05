@@ -24,7 +24,7 @@ import allocate from '../assets/screens/allocate.jpg'
 import facility from '../assets/Aug_22_2025_E.jpg'
 import myKpis from '../assets/screens/my-kpis.png'
 
-const capabilities = ['METRC sync (read-only)', 'LeafLink inventory', 'USB scale capture', 'Growlink & SensorPush sensors', 'Employee KPIs on every badge']
+const capabilities = ['METRC sync (read-only)', 'USB scale capture', 'Growlink & SensorPush sensors', 'Employee KPIs on every badge']
 
 const stages = [
   { n: '01', name: 'Import', line: 'Start the batch from the METRC harvest: plant count and wet weight included.' },
@@ -54,7 +54,7 @@ const features = [
   {
     kicker: 'Allocation',
     title: 'Pack what is actually selling.',
-    body: 'Tested flower is split into product lines by grade, with live LeafLink inventory beside it, and drops straight into the packaging and label queues.',
+    body: 'Tested flower is split into product lines by grade, with current sales inventory beside it, and drops straight into the packaging and label queues.',
     img: allocate,
     alt: 'HarvestHub Allocation Station screen',
   },
@@ -63,7 +63,7 @@ const features = [
 const reports = [
   { name: 'Production', line: 'Harvest breakdowns by cultivar, crop and room: wet to dry, AAA/A/B, trim and loss. Crop report cards against projected yield.' },
   { name: 'Week over week', line: 'Executive production report: bucking and trim this week against last, month against month, and packaging by brand and SKU.' },
-  { name: 'Cost & sales', line: 'COGS by crop with labor by department. LeafLink sell-through, stock levels and inventory that has sat 45+ days.' },
+  { name: 'Cost & sales', line: 'COGS by crop with labor by department. Sell-through, stock levels and inventory that has sat 45+ days.' },
   { name: 'People', line: 'Trim lb/hr and bucking plants/hr rankings, packaging units per hour, task times, attendance points and trim bonus tiers.' },
 ]
 
@@ -74,13 +74,12 @@ const departments: { icon: ComponentType<IconProps>; name: string; line: string 
   { icon: Flask, name: 'Hash lab', line: 'Fresh frozen, washing, pressing, rosin and jarring.' },
   { icon: Cylinder, name: 'Pre-roll', line: 'Allocation, grind, machine runs, sort/fix/pack, labeling.' },
   { icon: TestTube, name: 'Testing', line: 'Testing batches, lab hand-off and METRC results.' },
-  { icon: Truck, name: 'Fulfillment', line: 'Check-in, LeafLink orders and inventory release.' },
+  { icon: Truck, name: 'Fulfillment', line: 'Check-in, orders and inventory release.' },
   { icon: UsersThree, name: 'People & tasks', line: 'Attendance, task tracking and daily messages.' },
 ]
 
 const integrations = [
   { name: 'METRC', what: 'Harvests, plants, packages and lab results', note: 'read-only' },
-  { name: 'LeafLink', what: 'Wholesale inventory and orders', note: 'read-only' },
   { name: 'Ohaus scales', what: 'USB weight capture with stable readings', note: 'web serial' },
   { name: 'Growlink', what: 'Room controllers and sensor readings', note: 'live' },
   { name: 'SensorPush', what: 'Temperature and humidity monitoring', note: 'live' },
