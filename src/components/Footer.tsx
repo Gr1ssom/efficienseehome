@@ -38,6 +38,8 @@ export default function Footer() {
             <h4 className={styles.colTitle}>Customers</h4>
             <ul className={styles.colList}>
               <li><a href="https://hub.efficiensee.io" target="_blank" rel="noreferrer" className={styles.colLink}>Sign in ↗</a></li>
+              <li><a href="/orderoasis/privacy.html" className={styles.colLink}>OrderOasis Privacy Policy</a></li>
+              <li><a href="/orderoasis/terms.html" className={styles.colLink}>OrderOasis Terms of Service</a></li>
             </ul>
           </div>
         </nav>
